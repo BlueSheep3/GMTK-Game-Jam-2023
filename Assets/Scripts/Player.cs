@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 class Player : MonoBehaviour
 {
@@ -182,6 +183,40 @@ class Player : MonoBehaviour
 			AnimState.Fall => 0.1f,
 			_ => throw new System.Exception("invalid anim state")
 		};
+	}
+	#endregion
+
+	#region: collision
+	void OnCollisionStay2D(Collision2D collision) {
+		CustomRuleTile tile = GetCollisionTileInfo(collision);
+
+		switch(tile?.type) {
+			case CustomRuleTile.Type.Deadly: Die(); break;
+			case null: Debug.LogWarning("trigger tile was null"); break;
+		}
+	}
+
+	CustomRuleTile GetCollisionTileInfo(Collision2D collision) {
+		if(!collision.collider.TryGetComponent<Tilemap>(out var map)) return null;
+		var grid = map.layoutGrid;
+
+		// Find the coordinates of the tile we hit.
+		var contact = collision.GetContact(collision.contactCount - 1);
+		Vector3 contactPoint = contact.point - 0.05f * contact.normal;
+		Vector3 gridPosition = grid.transform.InverseTransformPoint(contactPoint);
+		Vector3Int cell = grid.LocalToCell(gridPosition);
+
+		// extract the tile and check if it's ice
+		var tile = map.GetTile(cell);
+		if(tile is not CustomRuleTile tile2) return null;
+		return tile2;
+	}
+	#endregion
+
+	#region: death
+	void Die() {
+		// TODO
+		Debug.Log("died");
 	}
 	#endregion
 }
