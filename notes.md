@@ -21,3 +21,8 @@
   - spike
   - moving platform
   - key & door
+
+
+## bugs
+
+- weird collision slowing player down

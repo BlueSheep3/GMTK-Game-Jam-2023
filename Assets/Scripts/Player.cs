@@ -14,6 +14,11 @@ class Player : MonoBehaviour
 	// self refs
 	public Rigidbody2D rb;
 	public SpriteRenderer spriteRenderer;
+	public Animator animator;
+	public Transform visualTransform;
+
+	// refs
+	public RuntimeAnimatorController[] animatorControllers = new RuntimeAnimatorController[4];
 
 	// fields
 	bool grounded = false;
@@ -47,6 +52,7 @@ class Player : MonoBehaviour
 			}
 		}
 		DoMovement();
+		UpdateAnimState();
 	}
 
 	void DebugHotKeys() {
@@ -127,8 +133,10 @@ class Player : MonoBehaviour
 			grounded = false;
 		}
 
-		float x = (input.left ? -1 : 0) + (input.right ? 1 : 0);
-		newVel.x += x * (grounded ? GROUND_ACCEL : AIR_ACCEL);
+		int xInput = (input.left ? -1 : 0) + (input.right ? 1 : 0);
+		newVel.x += xInput * (grounded ? GROUND_ACCEL : AIR_ACCEL);
+
+		UpdateFacingDir(xInput);
 
 		rb.velocity = newVel;
 	}
@@ -142,5 +150,42 @@ class Player : MonoBehaviour
 			return true;
 		return false;
 	}
+
+	void UpdateFacingDir(int xInput) {
+		if(xInput == 0) return;
+		Vector3 scale = visualTransform.localScale;
+		scale.x = xInput;
+		visualTransform.localScale = scale;
+	}
 	#endregion
+
+	#region: animation
+	void UpdateAnimState() {
+		AnimState state = AnimState.Idle;
+		if(Mathf.Abs(rb.velocity.x) > 0.05f)
+			state = AnimState.Run;
+		if(!grounded)
+			state = rb.velocity.y > 0 ? AnimState.Jump : AnimState.Fall;
+		SetAnim(state);
+	}
+
+	void SetAnim(AnimState state) {
+		animator.runtimeAnimatorController = animatorControllers[(int)state];
+		SetAnimationSpeed(state);
+	}
+
+	void SetAnimationSpeed(AnimState state) {
+		animator.speed = state switch {
+			AnimState.Idle => 0.1f,
+			AnimState.Run => 0.6f,
+			AnimState.Jump => 0.2f,
+			AnimState.Fall => 0.1f,
+			_ => throw new System.Exception("invalid anim state")
+		};
+	}
+	#endregion
+}
+
+enum AnimState {
+	Idle, Run, Jump, Fall
 }

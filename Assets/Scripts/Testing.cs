@@ -49,8 +49,3 @@ class Testing : MonoBehaviour
 
 	}
 }
-
-
-enum AnimState {
-	Idle, Run, Jump, Fall
-}

@@ -842,14 +842,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f187d8cebfb41a4eb3b63d46c12ccbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JUMP_STRENGTH: 16
-  GROUND_ACCEL: 2.7
-  AIR_ACCEL: 1.5
-  FRICTION: 0.75
-  DRAG: 0.86
-  GRAVITY: -1
   rb: {fileID: 572721479}
   spriteRenderer: {fileID: 1235798403}
+  animator: {fileID: 1235798402}
+  visualTransform: {fileID: 1235798400}
+  animatorControllers:
+  - {fileID: 9100000, guid: 9b230498d8332af4e930a2cd9e78f909, type: 2}
+  - {fileID: 9100000, guid: ceefa796f7e543240a28e49574ce92ec, type: 2}
+  - {fileID: 9100000, guid: 3665a222fc554e6488ba46d5fcaabd09, type: 2}
+  - {fileID: 9100000, guid: 79266d21c3a0691458362fd0475b4568, type: 2}
 --- !u!4 &572721477
 Transform:
   m_ObjectHideFlags: 0
@@ -969,7 +970,6 @@ GameObject:
   - component: {fileID: 1235798400}
   - component: {fileID: 1235798403}
   - component: {fileID: 1235798402}
-  - component: {fileID: 1235798401}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -992,23 +992,6 @@ Transform:
   m_Father: {fileID: 572721477}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1235798401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235798399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed06a64fdb130ef4d9a1d3a88f93ed38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animators:
-  - {fileID: 9100000, guid: 9b230498d8332af4e930a2cd9e78f909, type: 2}
-  - {fileID: 9100000, guid: ceefa796f7e543240a28e49574ce92ec, type: 2}
-  - {fileID: 9100000, guid: 3665a222fc554e6488ba46d5fcaabd09, type: 2}
-  - {fileID: 9100000, guid: 79266d21c3a0691458362fd0475b4568, type: 2}
 --- !u!95 &1235798402
 Animator:
   serializedVersion: 5
