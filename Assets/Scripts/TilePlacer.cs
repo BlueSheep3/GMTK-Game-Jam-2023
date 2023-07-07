@@ -8,18 +8,19 @@ class TilePlacer : MonoBehaviour
 	public Camera mainCamera;
 	public CustomRuleTile[] allTileOptions;
 	public Tilemap tilemap;
-	List<int> tileAmounts = new();
+	public int[] tileAmounts;
 	int currentTile = -1;
 
 
 	void Start()
     {
-		for(int i = 0; i < tileAmounts.Count; i++) {
+		if(allTileOptions.Length != tileAmounts.Length)
+			Debug.LogError("Tile options and amounts do not match");
+		for(int i = 0; i < tileAmounts.Length; i++)
 			if(tileAmounts[i] >= 0) {
 				currentTile = i;
 				break;
 			}
-		}
 		if(currentTile == -1)
 			Debug.LogError("No tiles in the list");
 	}
