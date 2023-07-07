@@ -4,12 +4,12 @@ using UnityEngine;
 class Player : MonoBehaviour
 {
 	// constants
-	public float JUMP_STRENGTH = 20f;
-	public float GROUND_ACCEL = 2.5f;
-	public float AIR_ACCEL = 2f;
-	public float FRICTION = 0.7f;
-	public float DRAG = 0.97f;
-	public float GRAVITY = -1f;
+	const float JUMP_STRENGTH = 16f;
+	const float GROUND_ACCEL = 2.7f;
+	const float AIR_ACCEL = 1.5f;
+	const float FRICTION = 0.75f;
+	const float DRAG = 0.86f;
+	const float GRAVITY = -1f;
 
 	// self refs
 	public Rigidbody2D rb;
@@ -106,16 +106,15 @@ class Player : MonoBehaviour
 	#region: movement
 	void DoMovement() {
 		// temporarily just change sr color
-		Color color = Color.black;
-		color.r = grounded ? 1 : 0;
-		spriteRenderer.color = color;
+		// Color color = Color.black;
+		// color.r = grounded ? 1 : 0;
+		// spriteRenderer.color = color;
 
 		Vector2 newVel = rb.velocity;
 
-		newVel *= grounded ? FRICTION : DRAG;
+		newVel.x *= grounded ? FRICTION : DRAG;
 
 		newVel.y += GRAVITY;
-		if(grounded) newVel.y = -0.1f;
 
 		rb.velocity = newVel;
 	}
@@ -135,10 +134,10 @@ class Player : MonoBehaviour
 	}
 
 	bool IsGrounded() {
-		RaycastHit2D hit = Physics2D.Raycast(rb.position + new Vector2(0.6f, -0.6f), Vector2.down, 0.2f, 1 << 6);
+		RaycastHit2D hit = Physics2D.Raycast(rb.position + new Vector2(-0.4f, -0.45f), Vector2.down, 0.2f, 1 << 6);
 		if(hit.collider != null)
 			return true;
-		RaycastHit2D hit2 = Physics2D.Raycast(rb.position + new Vector2(-0.6f, -0.6f), Vector2.down, 0.2f, 1 << 6);
+		RaycastHit2D hit2 = Physics2D.Raycast(rb.position + new Vector2(0.35f, -0.45f), Vector2.down, 0.2f, 1 << 6);
 		if(hit2.collider != null)
 			return true;
 		return false;
