@@ -7,7 +7,7 @@ class CustomRuleTile : RuleTile
 	public Type type = Type.Normal;
 
 	public enum Type : byte {
-		Normal, Slippery, Sticky
+		Normal, Slippery, Sticky, Deadly
 	}
 
 
