@@ -3,11 +3,20 @@ using UnityEngine;
 
 class Player : MonoBehaviour
 {
+	// constants
+	public float JUMP_STRENGTH = 20f;
+	public float GROUND_ACCEL = 2.5f;
+	public float AIR_ACCEL = 2f;
+	public float FRICTION = 0.7f;
+	public float DRAG = 0.97f;
+	public float GRAVITY = -1f;
+
 	// self refs
 	public Rigidbody2D rb;
 	public SpriteRenderer spriteRenderer;
 
 	// fields
+	bool grounded = false;
 	bool playingback = false;
 	bool recording = false;
 	PlayerInput currentInput = new();
@@ -18,11 +27,13 @@ class Player : MonoBehaviour
 	void Update() {
 		if(recording)
 			RecordInputInUpdate();
-		
+
 		DebugHotKeys();
 	}
 
 	void FixedUpdate() {
+		grounded = IsGrounded();
+
 		if(recording) {
 			DoInput(currentInput);
 			RecordInputInFixedUpdate();
@@ -35,6 +46,7 @@ class Player : MonoBehaviour
 				Debug.Log("stopped playingback");
 			}
 		}
+		DoMovement();
 	}
 
 	void DebugHotKeys() {
@@ -91,14 +103,45 @@ class Player : MonoBehaviour
 	}
 	#endregion
 
-	#region: inputs
-	void DoInput(PlayerInput input) {
+	#region: movement
+	void DoMovement() {
 		// temporarily just change sr color
 		Color color = Color.black;
-		color.r = input.left ? 1 : 0;
-		color.g = input.right ? 1 : 0;
-		color.b = input.jump ? 1 : 0;
+		color.r = grounded ? 1 : 0;
 		spriteRenderer.color = color;
+
+		Vector2 newVel = rb.velocity;
+
+		newVel *= grounded ? FRICTION : DRAG;
+
+		newVel.y += GRAVITY;
+		if(grounded) newVel.y = -0.1f;
+
+		rb.velocity = newVel;
+	}
+
+	void DoInput(PlayerInput input) {
+		Vector2 newVel = rb.velocity;
+
+		if(grounded && input.jump) {
+			newVel.y = JUMP_STRENGTH;
+			grounded = false;
+		}
+
+		float x = (input.left ? -1 : 0) + (input.right ? 1 : 0);
+		newVel.x += x * (grounded ? GROUND_ACCEL : AIR_ACCEL);
+
+		rb.velocity = newVel;
+	}
+
+	bool IsGrounded() {
+		RaycastHit2D hit = Physics2D.Raycast(rb.position + new Vector2(0.6f, -0.6f), Vector2.down, 0.2f, 1 << 6);
+		if(hit.collider != null)
+			return true;
+		RaycastHit2D hit2 = Physics2D.Raycast(rb.position + new Vector2(-0.6f, -0.6f), Vector2.down, 0.2f, 1 << 6);
+		if(hit2.collider != null)
+			return true;
+		return false;
 	}
 	#endregion
 }
