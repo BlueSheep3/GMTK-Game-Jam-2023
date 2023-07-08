@@ -34,7 +34,9 @@ class Player : MonoBehaviour
 		if(recording)
 			RecordInputInUpdate();
 
-		DebugHotKeys();
+		#if UNITY_EDITOR
+			DebugHotKeys();
+		#endif
 	}
 
 	void FixedUpdate() {
