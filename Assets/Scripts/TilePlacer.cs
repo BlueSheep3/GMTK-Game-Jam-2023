@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 class TilePlacer : MonoBehaviour
 {
-	public Camera mainCamera;
 	public Tilemap tilemap;
 	public Tilemap tileHasBeenPlacedHere;
 	public Tilemap previewLayer;
@@ -64,7 +63,7 @@ class TilePlacer : MonoBehaviour
 			return;
 		}
 		Vector3 mousePos = Input.mousePosition;
-        Vector3 worldPos = mainCamera.ScreenToWorldPoint(mousePos);
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
         Vector3Int cellPos = tilemap.WorldToCell(worldPos);
         if (Input.GetMouseButtonDown(0))
 			if(CanPlaceTile(currentTile, cellPos))
@@ -96,7 +95,7 @@ class TilePlacer : MonoBehaviour
 		eraserInstance.transform.position = new Vector3(0, -1000, 0);
 		if(currentTile == tileAmounts.Length) {
 			Vector3 mousePos = Input.mousePosition;
-        	Vector3 worldPos = mainCamera.ScreenToWorldPoint(mousePos);
+        	Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
 			Vector3 newPos = new Vector3(worldPos.x + 0.3f, worldPos.y + 0.35f, 0);
 			eraserInstance.transform.position = newPos;
 			Cursor.visible = false;
