@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 class MainMenu : MonoBehaviour
 {
@@ -9,10 +10,17 @@ class MainMenu : MonoBehaviour
 	public GameObject levelsMenu;
 	public GameObject settingsMenu;
 	public GameObject creditsMenu;
+	public Slider qualitySlider;
+	public Slider volumeSlider;
+	public TMP_Text screenSizeText;
 
 	void Awake() {
 		if(Savedata.savefile == null)
 			Savedata.Load();
+
+		qualitySlider.value = Savedata.savefile.quality;
+		volumeSlider.value = Savedata.savefile.volume;
+		SetScreenSizeText();
 	}
 
 	#region: levels
@@ -60,7 +68,16 @@ class MainMenu : MonoBehaviour
 			int height = Screen.currentResolution.height;
 			Screen.SetResolution(width, height, true);
 		} else
-			Screen.SetResolution(640 * size, 480 * size, false);
+			Screen.SetResolution(960 * size, 540 * size, false);
+		
+		SetScreenSizeText();
+	}
+
+	void SetScreenSizeText() {
+		if(Savedata.savefile.screenSize == 0)
+			screenSizeText.text = "Fullscreen";
+		else
+			screenSizeText.text = $"Screensize: x{Savedata.savefile.screenSize}";
 	}
 	#endregion
 
