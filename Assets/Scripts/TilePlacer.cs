@@ -57,7 +57,7 @@ class TilePlacer : MonoBehaviour
 
     void Update()
     {
-		if(Player.inst.playingback) {
+		if(Player.inst.isPlaying) {
 			previewLayer.ClearAllTiles();
 			Cursor.visible = true;
 			eraserInstance.transform.position = new Vector3(0, -1000, 0);
