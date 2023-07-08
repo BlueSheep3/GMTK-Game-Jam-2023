@@ -9,6 +9,8 @@ class TilePlacer : MonoBehaviour
 	public CustomRuleTile[] allTileOptions;
 	public Tilemap tilemap;
 	public int[] tileAmounts;
+	public GameObject tileCounter;
+	List<TMPro.TextMeshProUGUI> tileCounterCounts = new();
 	int currentTile = -1;
 
 
@@ -16,13 +18,21 @@ class TilePlacer : MonoBehaviour
     {
 		if(allTileOptions.Length != tileAmounts.Length)
 			Debug.LogError("Tile options and amounts do not match");
-		for(int i = 0; i < tileAmounts.Length; i++)
+		int counter = 0;
+		for(int i = tileAmounts.Length; i > 0; i--)
 			if(tileAmounts[i] >= 0) {
 				currentTile = i;
-				break;
+				counter++;
 			}
 		if(currentTile == -1)
 			Debug.LogError("No tiles in the list");
+		for(int i = 0; i < tileAmounts.Length; i++)
+			if(tileAmounts[i] > 0) {
+				Transform tileCounterObj = Instantiate(tileCounter, new Vector3(10 * counter - 5 * i, 0, 0), Quaternion.identity).transform.GetChild(0);
+				tileCounterObj.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>().text = tileAmounts[i].ToString();
+				tileCounterObj.GetChild(1).GetComponent<SpriteRenderer>().sprite = allTileOptions[i].m_DefaultSprite;
+				tileCounterCounts.Add(tileCounterObj.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>());
+			}
 	}
     
 
@@ -44,6 +54,19 @@ class TilePlacer : MonoBehaviour
 	{
 		tilemap.SetTile(position, allTileOptions[index]);
 		tileAmounts[index]--;
+		UpdateOneTileCounter();
+	}
+
+	void UpdateOneTileCounter() {
+		int counter = 0;
+		for(int i = 0; i < tileAmounts.Length; i++)
+			if(tileAmounts[i] > 0) {
+				if(tileAmounts[i].ToString() != tileCounterCounts[counter].text) {
+					tileCounterCounts[counter].text = tileAmounts[i].ToString();
+					return;
+				}
+				counter++;
+			}
 	}
 
 	bool CanPlaceTile(int index, Vector3Int position) {
