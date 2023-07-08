@@ -57,6 +57,12 @@ class TilePlacer : MonoBehaviour
 
     void Update()
     {
+		if(Player.inst.playingback) {
+			previewLayer.ClearAllTiles();
+			Cursor.visible = true;
+			eraserInstance.transform.position = new Vector3(0, -1000, 0);
+			return;
+		}
 		Vector3 mousePos = Input.mousePosition;
         Vector3 worldPos = mainCamera.ScreenToWorldPoint(mousePos);
         Vector3Int cellPos = tilemap.WorldToCell(worldPos);

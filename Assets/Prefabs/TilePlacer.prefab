@@ -59,4 +59,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d1c504d50d72fd2408351226e5ed9bdc, type: 2}
   - {fileID: 11400000, guid: d83c9b00745e17f4c93cca84d6064365, type: 2}
   tileAmounts: ffffffffffffffffffffffffffffffffffffffffffffffff
-  eraser: {fileID: 21300000, guid: 604d4718090549148bee5d796d14e0d3, type: 3}
+  eraser: {fileID: 2605282029721990454, guid: cc51761a1bd75924897c7f34a71521fe, type: 3}
