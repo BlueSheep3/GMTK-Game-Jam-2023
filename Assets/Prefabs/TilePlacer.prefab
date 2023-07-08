@@ -54,3 +54,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d83c9b00745e17f4c93cca84d6064365, type: 2}
   tilemap: {fileID: 0}
   tileAmounts: 000000000000000000000000000000000000000000000000
+  tileCounter: {fileID: 9074890934802770289, guid: a342368eacde48246b83173d40bc4b2b, type: 3}
