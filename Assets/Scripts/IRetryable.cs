@@ -1,0 +1,4 @@
+interface IRetryable
+{
+	void Retry();
+}

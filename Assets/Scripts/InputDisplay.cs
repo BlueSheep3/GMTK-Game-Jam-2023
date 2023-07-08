@@ -53,7 +53,7 @@ class InputDisplay : MonoBehaviour
 			var (input, time) = levelInputs[i];
 			GameObject inputAndTime = Instantiate(inputAndTimePrefab, transform);
 			inputAndTime.GetComponent<InputAndTime>().Initialize(input, time);
-			inputAndTime.GetComponent<RectTransform>().anchoredPosition += i * 120 * Vector2.down;
+			inputAndTime.GetComponent<RectTransform>().anchoredPosition += i * 70 * Vector2.down;
 		}
 	}
 
@@ -69,7 +69,7 @@ class InputDisplay : MonoBehaviour
 
 			// move others back up
 			foreach(Transform child in transform)
-				child.GetComponent<RectTransform>().anchoredPosition += 120 * Vector2.up;
+				child.GetComponent<RectTransform>().anchoredPosition += 70 * Vector2.up;
 
 			return;
 		}
