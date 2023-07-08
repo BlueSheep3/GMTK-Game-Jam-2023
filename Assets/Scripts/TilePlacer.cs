@@ -24,7 +24,7 @@ class TilePlacer : MonoBehaviour
 
 	void Start()
     {
-		eraserInstance = Instantiate(eraser, transform);
+		eraserInstance = Instantiate(eraser, canvas.transform);
 		if(allTileOptions.Length != tileAmounts.Length)
 			Debug.LogError("Tile options and amounts do not match");
 		int counter = 0;
@@ -193,6 +193,8 @@ class TilePlacer : MonoBehaviour
 	}
 
 	bool CanPlaceTile(int index, Vector3Int position) {
+		if(Player.inst.transform.position == position)
+			return false;
 		if(index == tileAmounts.Length)
 			return tileHasBeenPlacedHere.HasTile(position);
 		if(tileAmounts[index] <= 0)
