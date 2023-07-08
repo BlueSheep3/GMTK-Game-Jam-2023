@@ -23,7 +23,7 @@ class Player : MonoBehaviour
 
 	// fields
 	bool grounded = false;
-	bool playingback = false;
+	internal bool playingback = false;
 	bool recording = false;
 	PlayerInput currentInput = new();
 	internal List<PlayerInput> inputs = new();
