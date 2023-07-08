@@ -16,4 +16,8 @@ class InputAndTime : MonoBehaviour
 		if(input.right) rightArrow.color = new(0, 1, 0, 0.5f);
 		timeText.text = time.ToString();
 	}
+
+	public void SetTime(int time) {
+		timeText.text = time.ToString();
+	}
 }

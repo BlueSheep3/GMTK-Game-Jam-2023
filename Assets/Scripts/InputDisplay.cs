@@ -23,7 +23,7 @@ class InputDisplay : MonoBehaviour
 	}
 
 	void FixedUpdate() {
-		if(Player.inst.playingback)
+		if(Player.inst.isPlaying)
 			AdvancePlayback();
 	}
 
@@ -72,5 +72,6 @@ class InputDisplay : MonoBehaviour
 
 		current.time--;
 		remainingInputs[0] = current;
+		transform.GetChild(0).GetComponent<InputAndTime>().SetTime(current.time);
 	}
 }

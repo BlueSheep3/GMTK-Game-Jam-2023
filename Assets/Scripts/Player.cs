@@ -25,11 +25,12 @@ class Player : MonoBehaviour
 
 	// fields
 	bool grounded = false;
-	internal bool playingback = false;
 	bool recording = false;
 	PlayerInput currentInput = new();
-	internal List<PlayerInput> inputs = new();
 	int playbackIndex = 0;
+	internal List<PlayerInput> inputs = new();
+	internal bool isPlaying = false;
+	bool playbackHasFinished = false;
 
 
 	void Awake() {
@@ -57,11 +58,11 @@ class Player : MonoBehaviour
 			DoInput(currentInput);
 			RecordInputInFixedUpdate();
 		}
-		if(playingback) {
+		if(isPlaying && !playbackHasFinished) {
 			DoInput(inputs[playbackIndex]);
 			playbackIndex++;
 			if(playbackIndex >= inputs.Count) {
-				playingback = false;
+				playbackHasFinished = true;
 				Debug.Log("stopped playingback");
 			}
 		}
@@ -80,9 +81,16 @@ class Player : MonoBehaviour
 			SaveRecording();
 		}
 		if(Input.GetKeyDown(KeyCode.P)) {
-			playingback = !playingback;
+			isPlaying = true;
+			playbackHasFinished = false;
 			playbackIndex = 0;
-			Debug.Log(playingback ? "started playingback" : "stopped playingback");
+			Debug.Log("started playingback");
+		}
+		if(Input.GetKeyDown(KeyCode.O)) {
+			isPlaying = false;
+			playbackHasFinished = false;
+			playbackIndex = 0;
+			Debug.Log("stopped playingback");
 		}
 	}
 
@@ -91,7 +99,7 @@ class Player : MonoBehaviour
 		currentInput.ClearLeftRight();
 		currentInput.right = Input.GetKey(KeyCode.D);
 		currentInput.left = Input.GetKey(KeyCode.A);
-		if(Input.GetKeyDown(KeyCode.Space))
+		if(Input.GetKeyDown(KeyCode.W))
 			currentInput.jump = true;
 	}
 
