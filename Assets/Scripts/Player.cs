@@ -31,8 +31,10 @@ class Player : MonoBehaviour, IRetryable
 	int playbackIndex = 0;
 	internal List<PlayerInput> inputs = new();
 	internal bool isPlaying = false;
-	bool playbackHasFinished = false;
+	internal bool playbackHasFinished = false;
 	Vector3 startPos;
+	internal bool hasWon = false;
+	internal int currentLevelId = -1;
 
 
 	void Awake() {
@@ -46,8 +48,8 @@ class Player : MonoBehaviour, IRetryable
 
 		string levelName = SceneManager.GetActiveScene().name;
 		if(levelName.StartsWith("Level")) {
-			int levelId = int.Parse(levelName.Substring(5));
-			LoadRecording(levelId);
+			currentLevelId = int.Parse(levelName.Substring(5));
+			LoadRecording(currentLevelId);
 		}
 	}
 

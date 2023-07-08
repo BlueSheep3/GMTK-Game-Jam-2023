@@ -6,8 +6,11 @@ class InGameGUI : MonoBehaviour
 	// self refs
 	public GameObject whileBuildingButtons;
 	public GameObject whilePlayingButtons;
+	public GameObject youWinPoppup;
 
 	void Update() {
+		if(Player.inst.hasWon) return;
+
 		if(Input.GetKeyDown(KeyCode.Space) && !Player.inst.isPlaying) {
 			ClickedPlay();
 		}
@@ -35,5 +38,17 @@ class InGameGUI : MonoBehaviour
 
 	public void BackToMainMenu() {
 		SceneManager.LoadScene("MainMenu");
+	}
+
+	public void ClickedWonNext() {
+		int currentScene = SceneManager.GetActiveScene().buildIndex;
+		if(currentScene > Savedata.savefile.maxLevelCompleted)
+			Savedata.savefile.maxLevelCompleted = currentScene;
+		SceneManager.LoadScene(currentScene + 1);
+	}
+
+	public void ClickedWonRetry() {
+		youWinPoppup.SetActive(false);
+		ClickedRetry();
 	}
 }
