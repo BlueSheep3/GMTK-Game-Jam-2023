@@ -45,6 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
+  tilemap: {fileID: 0}
+  tileHasBeenPlacedHere: {fileID: 0}
+  previewLayer: {fileID: 0}
+  canvas: {fileID: 0}
+  tileCounter: {fileID: 9074890934802770289, guid: a342368eacde48246b83173d40bc4b2b, type: 3}
+  InvisibleTile: {fileID: 11400000, guid: 2d93b060de196c342b0b2b746094bee7, type: 2}
   allTileOptions:
   - {fileID: 11400000, guid: 4e071e332eb05554aa0d0acb5740331d, type: 2}
   - {fileID: 11400000, guid: a8f78b84f2fdfca4994f16e35a72ae0a, type: 2}
@@ -52,6 +58,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0f06279117a09e64aa7941c71ce71fe7, type: 2}
   - {fileID: 11400000, guid: d1c504d50d72fd2408351226e5ed9bdc, type: 2}
   - {fileID: 11400000, guid: d83c9b00745e17f4c93cca84d6064365, type: 2}
-  tilemap: {fileID: 0}
   tileAmounts: 000000000000000000000000000000000000000000000000
-  tileCounter: {fileID: 9074890934802770289, guid: a342368eacde48246b83173d40bc4b2b, type: 3}

@@ -9,11 +9,13 @@ class TilePlacer : MonoBehaviour
 {
 	public Camera mainCamera;
 	public Tilemap tilemap;
+	public Tilemap tileHasBeenPlacedHere;
 	public Tilemap previewLayer;
 	public GameObject canvas;
+	public GameObject tileCounter;
+	public CustomRuleTile InvisibleTile;
 	public CustomRuleTile[] allTileOptions;
 	public int[] tileAmounts;
-	public GameObject tileCounter;
 	List<TMPro.TextMeshProUGUI> tileCounterCounts = new();
 	int currentTile = -1;
 
@@ -80,11 +82,12 @@ class TilePlacer : MonoBehaviour
 		if(!CanPlaceTile(currentTile, position))
 			return;
 		
-		foreach (var pos in tilemap.cellBounds.allPositionsWithin)
-		{
-			Vector3Int localPlace = new Vector3Int(pos.x, pos.y, pos.z);
-			if (tilemap.HasTile(localPlace))
-				previewLayer.SetTile(localPlace, tilemap.GetTile(localPlace));
+		for(int i = -1; i <= 1; i++) {
+			for(int j = -1; j <= 1; j++) {
+				Vector3Int localPlace = position + new Vector3Int(i, j, 0);
+				if (tilemap.HasTile(localPlace))
+					previewLayer.SetTile(localPlace, tilemap.GetTile(localPlace));
+			}
 		}
 
 		previewLayer.SetTile(position, allTileOptions[currentTile]);
@@ -114,6 +117,7 @@ class TilePlacer : MonoBehaviour
 	void PlaceTile(int index, Vector3Int position)
 	{
 		tilemap.SetTile(position, allTileOptions[index]);
+		tileHasBeenPlacedHere.SetTile(position, InvisibleTile);
 		SubtractFromTileCounter(index);
 	}
 
@@ -145,6 +149,8 @@ class TilePlacer : MonoBehaviour
 
 	bool CanPlaceTile(int index, Vector3Int position) {
 		if(tileAmounts[index] <= 0)
+			return false;
+		if(tileHasBeenPlacedHere.HasTile(position))
 			return false;
 		if(tilemap.HasTile(position))
 			if(tilemap.GetColliderType(position) != Tile.ColliderType.None)
