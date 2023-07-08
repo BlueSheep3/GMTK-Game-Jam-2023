@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f5308aee76a34047886aa43607d4afe, type: 3}
-  m_Name: GroundRule
+  m_Name: SpikeRuleTile
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 370375692, guid: ab2c110ad06843c4d80b4e2454366a7b, type: 3}
   m_DefaultGameObject: {fileID: 0}
