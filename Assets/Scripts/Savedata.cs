@@ -15,6 +15,7 @@ static class Savedata
 	}
 
 	public static void Load() {
+		if(!File.Exists(path)) File.WriteAllText(path, "");
 		savefile = JsonUtility.FromJson<Savefile>(File.ReadAllText(path)) ?? new();
 		AudioListener.volume = savefile.volume / 100f;
 		QualitySettings.SetQualityLevel(savefile.quality);
