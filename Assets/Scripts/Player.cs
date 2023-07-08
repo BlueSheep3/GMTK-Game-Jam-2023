@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 
-class Player : MonoBehaviour
+class Player : MonoBehaviour, IRetryable
 {
 	public static Player inst;
 
@@ -32,10 +32,13 @@ class Player : MonoBehaviour
 	internal List<PlayerInput> inputs = new();
 	internal bool isPlaying = false;
 	bool playbackHasFinished = false;
+	bool isSpedUp = false;
+	Vector3 startPos;
 
 
 	void Awake() {
 		inst = this;
+		startPos = transform.position;
 
 		#if UNITY_EDITOR
 		if(Savedata.savefile == null)
@@ -54,11 +57,17 @@ class Player : MonoBehaviour
 			RecordInputInUpdate();
 
 		#if UNITY_EDITOR
-			DebugHotKeys();
+		DebugHotKeys();
 		#endif
 	}
 
 	void FixedUpdate() {
+		FakeFixedUpdate();
+		if(isSpedUp)
+			FakeFixedUpdate();
+	}
+
+	void FakeFixedUpdate() {
 		grounded = IsGrounded();
 
 		if(recording) {
@@ -78,7 +87,7 @@ class Player : MonoBehaviour
 	}
 
 	void DebugHotKeys() {
-		if(Input.GetKeyDown(KeyCode.R)) {
+		if(Input.GetKeyDown(KeyCode.E)) {
 			recording = !recording;
 			if(recording)
 				inputs.Clear();
@@ -88,16 +97,10 @@ class Player : MonoBehaviour
 			SaveRecording();
 		}
 		if(Input.GetKeyDown(KeyCode.P)) {
-			isPlaying = true;
-			playbackHasFinished = false;
-			playbackIndex = 0;
-			Debug.Log("started playingback");
+			StartPlayback();
 		}
 		if(Input.GetKeyDown(KeyCode.O)) {
-			isPlaying = false;
-			playbackHasFinished = false;
-			playbackIndex = 0;
-			Debug.Log("stopped playingback");
+			StopPlayback();
 		}
 	}
 
@@ -239,6 +242,31 @@ class Player : MonoBehaviour
 	void Die() {
 		// TODO
 		Debug.Log("died");
+	}
+	#endregion
+
+	#region: start / stop
+	public void StartPlayback() {
+		isPlaying = true;
+		playbackHasFinished = false;
+		playbackIndex = 0;
+	}
+
+	public void StopPlayback() {
+		isPlaying = false;
+		playbackHasFinished = false;
+		playbackIndex = 0;
+	}
+
+	public void ToggleSpeedUp() {
+		isSpedUp ^= true;
+	}
+
+	public void Retry() {
+		transform.position = startPos;
+		rb.velocity = Vector2.zero;
+		transform.localScale = Vector3.one;
+		StopPlayback();
 	}
 	#endregion
 }
