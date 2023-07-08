@@ -1,5 +1,3 @@
-# mirror world
-- second character
-
-# build Level
-- 
+- enemy
+- new levels
+- goal trigger
