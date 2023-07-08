@@ -26,7 +26,7 @@ class Player : MonoBehaviour
 	bool playingback = false;
 	bool recording = false;
 	PlayerInput currentInput = new();
-	List<PlayerInput> inputs = new();
+	internal List<PlayerInput> inputs = new();
 	int playbackIndex = 0;
 
 

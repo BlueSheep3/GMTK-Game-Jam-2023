@@ -1,3 +1,5 @@
+using System;
+
 struct PlayerInput
 {
 	public bool left;
@@ -21,4 +23,16 @@ struct PlayerInput
 
 	public override string ToString()
 		=> (left ? "l" : "-") + (right ? "r" : "-") + (jump ? "j" : "-");
+
+	public override bool Equals(object obj)
+		=> obj is PlayerInput input && input == this;
+
+	public override int GetHashCode()
+		=> HashCode.Combine(left, right, jump);
+
+	public static bool operator ==(PlayerInput a, PlayerInput b)
+		=> a.left == b.left && a.right == b.right && a.jump == b.jump;
+
+	public static bool operator !=(PlayerInput a, PlayerInput b)
+		=> a.left != b.left || a.right != b.right || a.jump != b.jump;
 }

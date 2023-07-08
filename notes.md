@@ -26,3 +26,13 @@
 ## bugs
 
 - weird collision slowing player down
+
+
+## todo
+
+- input display
+- player robot sprite
+- editable areas
+- tile sprites
+- music
+- sfx
