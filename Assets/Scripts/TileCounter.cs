@@ -8,6 +8,8 @@ class TileCounter: MonoBehaviour
 	public TilePlacer tilePlacer;
 
 	public void ChooseThis() {
+		if(tileIndex == -1)
+			return;
 		tilePlacer.GetComponent<TilePlacer>().SetCurrentTile(tileIndex);
 	}
 }

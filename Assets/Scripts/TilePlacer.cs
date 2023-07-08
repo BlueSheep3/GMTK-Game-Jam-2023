@@ -16,34 +16,42 @@ class TilePlacer : MonoBehaviour
 	public CustomRuleTile InvisibleTile;
 	public CustomRuleTile[] allTileOptions;
 	public int[] tileAmounts;
+	public GameObject eraser;
 	List<TMPro.TextMeshProUGUI> tileCounterCounts = new();
 	int currentTile = -1;
+	GameObject eraserInstance;
 
 
 	void Start()
     {
+		eraserInstance = Instantiate(eraser, transform);
 		if(allTileOptions.Length != tileAmounts.Length)
 			Debug.LogError("Tile options and amounts do not match");
 		int counter = 0;
-		for(int i = tileAmounts.Length - 1; i >= 0; i--)
-			if(tileAmounts[i] > 0) {
-				currentTile = i;
+		for(int i = 0; i < tileAmounts.Length; i++)
+			if(tileAmounts[i] >= 0)
 				counter++;
-			}
+		currentTile = GetFirstValidTileIndex();
 		if(currentTile == -1)
 			Debug.LogError("No tiles in the list");
 		int counter2 = 0;
 		for(int i = 0; i < tileAmounts.Length; i++) {
-			if(tileAmounts[i] > 0) {
+			if(tileAmounts[i] >= 0) {
 				Transform tileCounterObj = Instantiate(tileCounter, canvas.transform).transform;
 				tileCounterObj.GetComponent<TileCounter>().tilePlacer = this;
 				tileCounterObj.GetComponent<TileCounter>().tileIndex = counter2;
-				tileCounterObj.localPosition += new Vector3((counter2++ - counter/2f) * tileCounter.GetComponent<RectTransform>().rect.width, -250, 0);
+				tileCounterObj.localPosition += new Vector3((counter2++ - counter/2f - 0.5f) * tileCounter.GetComponent<RectTransform>().rect.width, -250, 0);
 				tileCounterObj.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>().text = tileAmounts[i].ToString();
 				tileCounterObj.GetChild(1).GetComponent<Image>().sprite = allTileOptions[i].m_DefaultSprite;
 				tileCounterCounts.Add(tileCounterObj.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>());
 			}
 		}
+		Transform eraserObj = Instantiate(tileCounter, canvas.transform).transform;
+		eraserObj.GetComponent<TileCounter>().tilePlacer = this;
+		eraserObj.GetComponent<TileCounter>().tileIndex = counter2;
+		eraserObj.localPosition += new Vector3((counter2++ - counter/2f - 0.5f) * tileCounter.GetComponent<RectTransform>().rect.width, -250, 0);
+		eraserObj.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>().text = "";
+		eraserObj.GetChild(1).GetComponent<Image>().sprite = eraser.GetComponent<SpriteRenderer>().sprite;
 	}
     
 
@@ -79,6 +87,17 @@ class TilePlacer : MonoBehaviour
 	void previewTiles(Vector3Int position) {
 		previewLayer.ClearAllTiles();
 
+		eraserInstance.transform.position = new Vector3(0, -1000, 0);
+		if(currentTile == tileAmounts.Length) {
+			Vector3 mousePos = Input.mousePosition;
+        	Vector3 worldPos = mainCamera.ScreenToWorldPoint(mousePos);
+			Vector3 newPos = new Vector3(worldPos.x + 0.3f, worldPos.y + 0.35f, 0);
+			eraserInstance.transform.position = newPos;
+			Cursor.visible = false;
+			return;
+		}
+		Cursor.visible = true;
+
 		if(!CanPlaceTile(currentTile, position))
 			return;
 		
@@ -101,37 +120,57 @@ class TilePlacer : MonoBehaviour
 		return results.Count > 0;
 	}
 
-	public void SetCurrentTile(int index) {//TODO activate this when clicking a tile counter
+	public void SetCurrentTile(int index) {
 		int p = -1;
 		for(int i = 0; i < tileAmounts.Length; i++) {
-			if(tileAmounts[i] > 0) {
+			if(tileAmounts[i] >= 0)
 				p++;
-			}
 			if(p == index) {
 				currentTile = i;
 				return;
 			}
 		}
+		if(index == tileCounterCounts.Count) {
+			currentTile = tileAmounts.Length;
+		}
 	}
 
 	void PlaceTile(int index, Vector3Int position)
 	{
+		if(index == tileAmounts.Length) {
+			AddToTileCounter(tilemap.GetTile(position));
+			tilemap.SetTile(position, null);
+			tileHasBeenPlacedHere.SetTile(position, null);
+			return;
+		}
 		tilemap.SetTile(position, allTileOptions[index]);
 		tileHasBeenPlacedHere.SetTile(position, InvisibleTile);
 		SubtractFromTileCounter(index);
 	}
 
+	void AddToTileCounter(TileBase tile) {
+		int counter = 0;
+		for(int i = 0; i < tileAmounts.Length; i++) {
+			if(tileAmounts[i] >= 0) {
+				if(tile == allTileOptions[i]) {
+					tileAmounts[i]++;
+					tileCounterCounts[counter].text = tileAmounts[i].ToString();
+					return;
+				}
+				counter++;
+			}
+		}
+	}
+
 	void SubtractFromTileCounter(int index) {
 		int counter = 0;
 		for(int i = 0; i < tileAmounts.Length; i++) {
-			if(tileAmounts[i] > 0) {
+			if(tileAmounts[i] >= 0) {
 				if(i == index) {
 					tileAmounts[index]--;
 					tileCounterCounts[counter].text = tileAmounts[i].ToString();
-					if(tileAmounts[index] == 0) {
-						tileCounterCounts.RemoveAt(counter);
-						currentTile = GetFirstTileIndex();
-					}
+					if(tileAmounts[index] == 0)
+						currentTile = GetFirstValidTileIndex();
 					return;
 				}
 				counter++;
@@ -139,15 +178,17 @@ class TilePlacer : MonoBehaviour
 		}
 	}
 	
-	int GetFirstTileIndex() {
+	int GetFirstValidTileIndex() {
 		for(int i = 0; i < tileAmounts.Length; i++) {
 			if(tileAmounts[i] > 0)
 				return i;
 		}
-		return 0;
+		return tileAmounts.Length;
 	}
 
 	bool CanPlaceTile(int index, Vector3Int position) {
+		if(index == tileAmounts.Length)
+			return tileHasBeenPlacedHere.HasTile(position);
 		if(tileAmounts[index] <= 0)
 			return false;
 		if(tileHasBeenPlacedHere.HasTile(position))
