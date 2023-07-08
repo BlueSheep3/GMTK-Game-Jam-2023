@@ -8,20 +8,12 @@ class InGameGUI : MonoBehaviour
 	public GameObject whilePlayingButtons;
 
 	void Update() {
-		if(Input.GetKeyDown(KeyCode.Space)) {
-			if(Player.inst.isPlaying) {
-				Player.inst.ToggleSpeedUp();
-			} else {
-				ClickedPlay();
-			}
+		if(Input.GetKeyDown(KeyCode.Space) && !Player.inst.isPlaying) {
+			ClickedPlay();
 		}
 		if(Input.GetKeyDown(KeyCode.R) && Player.inst.isPlaying) {
 			ClickedRetry();
 		}
-	}
-
-	public void BackToMainMenu() {
-		SceneManager.LoadScene("MainMenu");
 	}
 
 	// NOTE also used by hotkey
@@ -31,15 +23,17 @@ class InGameGUI : MonoBehaviour
 		whilePlayingButtons.SetActive(true);
 	}
 
-	public void ClickedSpeedUp() {
-		Player.inst.ToggleSpeedUp();
-	}
-
 	// NOTE also used by hotkey
 	public void ClickedRetry() {
 		foreach(GameObject o in GameObject.FindObjectsOfType<GameObject>()) {
 			if(o.TryGetComponent<IRetryable>(out var r))
 				r.Retry();
 		}
+		whileBuildingButtons.SetActive(true);
+		whilePlayingButtons.SetActive(false);
+	}
+
+	public void BackToMainMenu() {
+		SceneManager.LoadScene("MainMenu");
 	}
 }
