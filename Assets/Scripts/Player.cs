@@ -30,6 +30,13 @@ class Player : MonoBehaviour
 	int playbackIndex = 0;
 
 
+	#if UNITY_EDITOR
+	void Awake() {
+		if(Savedata.savefile == null)
+			Savedata.Load();
+	}
+	#endif
+
 	void Update() {
 		if(recording)
 			RecordInputInUpdate();

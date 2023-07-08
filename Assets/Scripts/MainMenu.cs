@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 class MainMenu : MonoBehaviour
 {
@@ -8,8 +10,17 @@ class MainMenu : MonoBehaviour
 	public GameObject settingsMenu;
 	public GameObject creditsMenu;
 
+	void Awake() {
+		if(Savedata.savefile == null)
+			Savedata.Load();
+	}
+
 	#region: levels
 	public void ClickedLevels() {
+		if(Savedata.savefile.maxLevelCompleted == 0) {
+			SceneManager.LoadScene("Level1");
+			return;
+		}
 		mainMenu.SetActive(false);
 		levelsMenu.SetActive(true);
 	}
@@ -31,14 +42,14 @@ class MainMenu : MonoBehaviour
 		settingsMenu.SetActive(false);
 	}
 
-	public void ChangedQuality(int value) {
-		Savedata.savefile.quality = value;
-		QualitySettings.SetQualityLevel(value);
+	public void ChangedQuality(Slider slider) {
+		Savedata.savefile.quality = (int)slider.value;
+		QualitySettings.SetQualityLevel((int)slider.value);
 	}
 
-	public void ChangedVolume(float value) {
-		Savedata.savefile.volume = (int)(value * 100);
-		AudioListener.volume = value;
+	public void ChangedVolume(Slider slider) {
+		Savedata.savefile.volume = (int)slider.value;
+		AudioListener.volume = slider.value / 100f;
 	}
 
 	public void ClickedScreenSize() {
@@ -67,6 +78,7 @@ class MainMenu : MonoBehaviour
 
 	#region: quit
 	public void Quit() {
+		Savedata.Save();
 		#if UNITY_EDITOR
 			UnityEditor.EditorApplication.ExitPlaymode();
 		#else
