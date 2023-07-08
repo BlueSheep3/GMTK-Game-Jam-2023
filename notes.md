@@ -23,11 +23,6 @@
   - key & door
 
 
-## bugs
-
-- weird collision slowing player down
-
-
 ## todo
 
 - player robot sprite

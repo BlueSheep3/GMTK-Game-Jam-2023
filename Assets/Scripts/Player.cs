@@ -32,7 +32,6 @@ class Player : MonoBehaviour, IRetryable
 	internal List<PlayerInput> inputs = new();
 	internal bool isPlaying = false;
 	bool playbackHasFinished = false;
-	bool isSpedUp = false;
 	Vector3 startPos;
 
 
@@ -62,12 +61,6 @@ class Player : MonoBehaviour, IRetryable
 	}
 
 	void FixedUpdate() {
-		FakeFixedUpdate();
-		if(isSpedUp)
-			FakeFixedUpdate();
-	}
-
-	void FakeFixedUpdate() {
 		grounded = IsGrounded();
 
 		if(recording) {
@@ -240,8 +233,14 @@ class Player : MonoBehaviour, IRetryable
 
 	#region: death
 	void Die() {
-		// TODO
-		Debug.Log("died");
+		transform.position = new(-1000, -1000, 0);
+	}
+
+	public void Retry() {
+		transform.position = startPos;
+		rb.velocity = Vector2.zero;
+		transform.localScale = Vector3.one;
+		StopPlayback();
 	}
 	#endregion
 
@@ -254,19 +253,7 @@ class Player : MonoBehaviour, IRetryable
 
 	public void StopPlayback() {
 		isPlaying = false;
-		playbackHasFinished = false;
-		playbackIndex = 0;
-	}
-
-	public void ToggleSpeedUp() {
-		isSpedUp ^= true;
-	}
-
-	public void Retry() {
-		transform.position = startPos;
-		rb.velocity = Vector2.zero;
-		transform.localScale = Vector3.one;
-		StopPlayback();
+		playbackHasFinished = true;
 	}
 	#endregion
 }

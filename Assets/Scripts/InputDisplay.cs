@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-class InputDisplay : MonoBehaviour
+class InputDisplay : MonoBehaviour, IRetryable
 {
 	// refs
 	public GameObject inputAndTimePrefab;
@@ -77,5 +77,10 @@ class InputDisplay : MonoBehaviour
 		current.time--;
 		remainingInputs[0] = current;
 		transform.GetChild(0).GetComponent<InputAndTime>().SetTime(current.time);
+	}
+
+	public void Retry() {
+		remainingInputs = new(levelInputs);
+		CreateVisuals();
 	}
 }
