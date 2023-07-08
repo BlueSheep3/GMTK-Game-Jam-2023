@@ -14,12 +14,13 @@ class InputDisplay : MonoBehaviour
 		// NOTE player must have already set up the inputs list
 		List<PlayerInput> playerInputs = Player.inst.inputs;
 
-		if(playerInputs != null && playerInputs.Count > 0)
+		if(playerInputs != null && playerInputs.Count > 0) {
 			GetInputsFromPlayerInputs(playerInputs);
 
-		CreateVisuals();
+			CreateVisuals();
 
-		remainingInputs = new(levelInputs);
+			remainingInputs = new(levelInputs);
+		}
 	}
 
 	void FixedUpdate() {
@@ -57,6 +58,9 @@ class InputDisplay : MonoBehaviour
 	}
 
 	void AdvancePlayback() {
+		if(remainingInputs == null || remainingInputs.Count == 0)
+			return;
+
 		var current = remainingInputs[0];
 
 		if(current.time <= 1) {
