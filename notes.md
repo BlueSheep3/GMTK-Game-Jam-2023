@@ -30,18 +30,12 @@
 - tile sprites
 - music
 - sfx
-- level retry (button)
 - better main menu (bg)
-- level select
-- play / speed up button (maybe pause button?)
 - credits
 - grass tiles
-- death
 - winning
 
 ## very important
 
-- death
 - winning
-- retry
-- play
+- tutorial
