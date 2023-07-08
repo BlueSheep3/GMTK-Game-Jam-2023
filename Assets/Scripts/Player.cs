@@ -4,6 +4,8 @@ using UnityEngine.Tilemaps;
 
 class Player : MonoBehaviour
 {
+	public static Player inst;
+
 	// constants
 	const float JUMP_STRENGTH = 16f;
 	const float GROUND_ACCEL = 2.7f;
@@ -30,12 +32,14 @@ class Player : MonoBehaviour
 	int playbackIndex = 0;
 
 
-	#if UNITY_EDITOR
 	void Awake() {
+		inst = this;
+
+		#if UNITY_EDITOR
 		if(Savedata.savefile == null)
 			Savedata.Load();
+		#endif
 	}
-	#endif
 
 	void Update() {
 		if(recording)

@@ -7,14 +7,12 @@ class InputDisplay : MonoBehaviour
 	public GameObject inputAndTimePrefab;
 
 	// fields
-	Player player;
 	List<(PlayerInput input, int time)> levelInputs;
 	List<(PlayerInput input, int time)> remainingInputs;
 
 	void Start() {
 		// NOTE player must have already set up the inputs list
-		player = GameObject.FindObjectOfType<Player>();
-		List<PlayerInput> playerInputs = player.inputs;
+		List<PlayerInput> playerInputs = Player.inst.inputs;
 
 		if(playerInputs != null && playerInputs.Count > 0)
 			GetInputsFromPlayerInputs(playerInputs);
@@ -25,7 +23,7 @@ class InputDisplay : MonoBehaviour
 	}
 
 	void FixedUpdate() {
-		if(player.playingback)
+		if(Player.inst.playingback)
 			AdvancePlayback();
 	}
 
