@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ class TilePlacer : MonoBehaviour
 {
 	public Camera mainCamera;
 	public Tilemap tilemap;
+	public Tilemap previewLayer;
 	public GameObject canvas;
 	public CustomRuleTile[] allTileOptions;
 	public int[] tileAmounts;
@@ -32,6 +34,8 @@ class TilePlacer : MonoBehaviour
 		for(int i = 0; i < tileAmounts.Length; i++) {
 			if(tileAmounts[i] > 0) {
 				Transform tileCounterObj = Instantiate(tileCounter, canvas.transform).transform;
+				tileCounterObj.GetComponent<TileCounter>().tilePlacer = this;
+				tileCounterObj.GetComponent<TileCounter>().tileIndex = counter2;
 				tileCounterObj.localPosition += new Vector3((counter2++ - counter/2f) * tileCounter.GetComponent<RectTransform>().rect.width, -250, 0);
 				tileCounterObj.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>().text = tileAmounts[i].ToString();
 				tileCounterObj.GetChild(1).GetComponent<Image>().sprite = allTileOptions[i].m_DefaultSprite;
@@ -43,16 +47,13 @@ class TilePlacer : MonoBehaviour
 
     void Update()
     {
+		Vector3 mousePos = Input.mousePosition;
+        Vector3 worldPos = mainCamera.ScreenToWorldPoint(mousePos);
+        Vector3Int cellPos = tilemap.WorldToCell(worldPos);
         if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 mousePos = Input.mousePosition;
-            Vector3 worldPos = mainCamera.ScreenToWorldPoint(mousePos);
-            Vector3Int cellPos = tilemap.WorldToCell(worldPos);
-
-            Debug.Log("Grid position: " + cellPos);
 			if(CanPlaceTile(currentTile, cellPos))
 				PlaceTile(currentTile, cellPos);
-        }
+		previewTiles(cellPos);
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 			SetCurrentTile(0);
 		if(Input.GetKeyDown(KeyCode.Alpha2))
@@ -73,7 +74,31 @@ class TilePlacer : MonoBehaviour
 			SetCurrentTile(8);
     }
 
-	void SetCurrentTile(int index) {
+	void previewTiles(Vector3Int position) {
+		previewLayer.ClearAllTiles();
+
+		if(!CanPlaceTile(currentTile, position))
+			return;
+		
+		foreach (var pos in tilemap.cellBounds.allPositionsWithin)
+		{
+			Vector3Int localPlace = new Vector3Int(pos.x, pos.y, pos.z);
+			if (tilemap.HasTile(localPlace))
+				previewLayer.SetTile(localPlace, tilemap.GetTile(localPlace));
+		}
+
+		previewLayer.SetTile(position, allTileOptions[currentTile]);
+	}
+
+	bool pointingAtUIElement() {
+		PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+		eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+		List<RaycastResult> results = new List<RaycastResult>();
+		EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+		return results.Count > 0;
+	}
+
+	public void SetCurrentTile(int index) {//TODO activate this when clicking a tile counter
 		int p = -1;
 		for(int i = 0; i < tileAmounts.Length; i++) {
 			if(tileAmounts[i] > 0) {
@@ -124,6 +149,8 @@ class TilePlacer : MonoBehaviour
 		if(tilemap.HasTile(position))
 			if(tilemap.GetColliderType(position) != Tile.ColliderType.None)
 				return false;
+		if(pointingAtUIElement())
+			return false;
 		return true;
 	}
 }
