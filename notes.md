@@ -30,9 +30,13 @@
 
 ## todo
 
-- input display
 - player robot sprite
 - editable areas
 - tile sprites
 - music
 - sfx
+- level retry (button)
+- better main menu (bg)
+- level select
+- play / speed up button (maybe pause button?)
+- credits

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 class Player : MonoBehaviour
 {
@@ -40,6 +41,12 @@ class Player : MonoBehaviour
 		if(Savedata.savefile == null)
 			Savedata.Load();
 		#endif
+
+		string levelName = SceneManager.GetActiveScene().name;
+		if(levelName.StartsWith("Level")) {
+			int levelId = int.Parse(levelName.Substring(5));
+			LoadRecording(levelId);
+		}
 	}
 
 	void Update() {
@@ -116,7 +123,7 @@ class Player : MonoBehaviour
 	}
 
 	void LoadRecording(int id) {
-		string recording = Resources.Load<TextAsset>($"Inputs{id}").text;
+		string recording = Resources.Load<TextAsset>($"LevelInputs/{id}").text;
 		inputs.Clear();
 		foreach(string line in recording.Split('\n'))
 			inputs.Add(new PlayerInput(line));
