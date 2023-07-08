@@ -171,7 +171,7 @@ class Player : MonoBehaviour, IRetryable
 		RaycastHit2D hit = Physics2D.Raycast(rb.position + new Vector2(-0.4f, -0.45f), Vector2.down, 0.2f, 1 << 6);
 		if(hit.collider != null)
 			return true;
-		RaycastHit2D hit2 = Physics2D.Raycast(rb.position + new Vector2(0.35f, -0.45f), Vector2.down, 0.2f, 1 << 6);
+		RaycastHit2D hit2 = Physics2D.Raycast(rb.position + new Vector2(0.37f, -0.45f), Vector2.down, 0.2f, 1 << 6);
 		if(hit2.collider != null)
 			return true;
 		return false;
