@@ -123,8 +123,9 @@ class Player : MonoBehaviour
 	}
 
 	void LoadRecording(int id) {
-		string recording = Resources.Load<TextAsset>($"LevelInputs/{id}").text;
+		string recording = Resources.Load<TextAsset>($"LevelInputs/{id}")?.text;
 		inputs.Clear();
+		if(recording == null) return;
 		foreach(string line in recording.Split('\n'))
 			inputs.Add(new PlayerInput(line));
 		Debug.Log($"loaded recording from Inputs{id}.txt");
