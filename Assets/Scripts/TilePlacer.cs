@@ -39,7 +39,7 @@ class TilePlacer : MonoBehaviour
 				Transform tileCounterObj = Instantiate(tileCounter, canvas.transform).transform;
 				tileCounterObj.GetComponent<TileCounter>().tilePlacer = this;
 				tileCounterObj.GetComponent<TileCounter>().tileIndex = counter2;
-				tileCounterObj.localPosition += new Vector3((counter2++ - counter/2f) * tileCounter.GetComponent<RectTransform>().rect.width * 1.2f, -350, 0);
+				tileCounterObj.localPosition += new Vector3((counter2++ - counter*0f) * tileCounter.GetComponent<RectTransform>().rect.width * 1.2f - 830, -370, 0);
 				tileCounterObj.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>().text = tileAmounts[i].ToString();
 				tileCounterObj.GetChild(1).GetComponent<Image>().sprite = allTileOptions[i].m_DefaultSprite;
 				tileCounterCounts.Add(tileCounterObj.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>());
@@ -48,7 +48,7 @@ class TilePlacer : MonoBehaviour
 		Transform eraserObj = Instantiate(tileCounter, canvas.transform).transform;
 		eraserObj.GetComponent<TileCounter>().tilePlacer = this;
 		eraserObj.GetComponent<TileCounter>().tileIndex = counter2;
-		eraserObj.localPosition += new Vector3((counter2++ - counter/2f) * tileCounter.GetComponent<RectTransform>().rect.width * 1.2f, -350, 0);
+		eraserObj.localPosition += new Vector3((counter2++ - counter*0f) * tileCounter.GetComponent<RectTransform>().rect.width * 1.2f - 830, -370, 0);
 		eraserObj.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>().text = "";
 		eraserObj.GetChild(1).GetComponent<Image>().sprite = eraser.GetComponent<SpriteRenderer>().sprite;
 	}

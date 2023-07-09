@@ -1509,7 +1509,7 @@ Tilemap:
       m_TileSpriteIndex: 16
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
+      m_TileObjectToInstantiateIndex: 2
       dummyAlignment: 0
       m_AllTileFlags: 2
   - first: {x: 4, y: 4, z: 0}
@@ -1796,8 +1796,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 7184844849729798787, guid: e2983c2a13aedd549b8da82c28d59cea, type: 3}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -10, y: -7, z: 0}
@@ -1830,11 +1830,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1954206885064826896, guid: ca715c2f5d44ab34ab6c03bcc6a60f9d, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1954206885064826896, guid: ca715c2f5d44ab34ab6c03bcc6a60f9d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1954206885064826896, guid: ca715c2f5d44ab34ab6c03bcc6a60f9d, type: 3}
       propertyPath: m_LocalPosition.y

@@ -218,6 +218,10 @@ class Player : MonoBehaviour, IRetryable
 	#endregion
 
 	#region: collision
+	void OnCollisionEnter2D(Collision2D collision) {
+		OnCollisionStay2D(collision);
+	}
+
 	void OnCollisionStay2D(Collision2D collision) {
 		CustomRuleTile tile = GetCollisionTileInfo(collision);
 		if (tile == null)
