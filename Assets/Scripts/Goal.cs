@@ -11,7 +11,7 @@ class Goal : MonoBehaviour
 				Savedata.savefile.maxLevelCompleted = Player.inst.currentLevelId;
 
 			Coin coin = GameObject.FindObjectOfType<Coin>();
-			if(coin == null || coin.sr.color.a != 1)
+			if(coin == null || coin.alpha != 1)
 				Savedata.savefile.collectedCoins[Player.inst.currentLevelId - 1] = true;
 
 			Savedata.Save();
