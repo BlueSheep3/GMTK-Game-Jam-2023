@@ -73,7 +73,16 @@ class MainMenu : MonoBehaviour
 		if(size == 0) {
 			int width = Screen.currentResolution.width;
 			int height = Screen.currentResolution.height;
-			Screen.SetResolution(width, height, true);
+			float aspectRatio = width / (float)height;
+
+			Debug.Log($"{width} / {height} = {aspectRatio}");
+
+			if(Mathf.Abs(aspectRatio - 1.777777f) < 0.01)
+				Screen.SetResolution(width, height, true);
+			else if(aspectRatio < 1.777777f)
+				Screen.SetResolution(width, (int)(width / 1.777777f), true);
+			else
+				Screen.SetResolution((int)(height * 1.777777f), height, true);
 		} else
 			Screen.SetResolution(960 * size, 540 * size, false);
 		
