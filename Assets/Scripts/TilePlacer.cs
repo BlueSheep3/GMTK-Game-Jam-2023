@@ -103,8 +103,10 @@ class TilePlacer : MonoBehaviour
 		}
 		Cursor.visible = true;
 
-		if(!CanPlaceTile(currentTile, position))
+		if(!CanPlaceTile(currentTile, position)) {
+			eraserInstance.transform.position = new Vector3(0, -1000, 0);
 			return;
+		}
 		
 		for(int i = -1; i <= 1; i++) {
 			for(int j = -1; j <= 1; j++) {
@@ -122,7 +124,10 @@ class TilePlacer : MonoBehaviour
 		eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 		List<RaycastResult> results = new List<RaycastResult>();
 		EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-		return results.Count > 0;
+		foreach(RaycastResult result in results)
+			if(result.gameObject.tag != "Text")
+				return true;
+		return false;
 	}
 
 	public void SetCurrentTile(int index) {
@@ -192,7 +197,7 @@ class TilePlacer : MonoBehaviour
 	}
 
 	bool CanPlaceTile(int index, Vector3Int position) {
-		Vector3 p = Player.inst.transform.position;
+		Vector3 p = Player.inst.transform.position - new Vector3(0.5f, 0.5f, 0);
 		if(p.x - 1 <= position.x && p.x + 1 >= position.x && p.y - 1 <= position.y && p.y + 1 >= position.y)
 			return false;
 		if(index == tileAmounts.Length)
