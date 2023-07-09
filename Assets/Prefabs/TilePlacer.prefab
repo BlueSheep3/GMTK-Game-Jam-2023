@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f40107811aa324884fe6233a918d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
   tilemap: {fileID: 0}
   tileHasBeenPlacedHere: {fileID: 0}
   previewLayer: {fileID: 0}
@@ -58,5 +57,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0f06279117a09e64aa7941c71ce71fe7, type: 2}
   - {fileID: 11400000, guid: d1c504d50d72fd2408351226e5ed9bdc, type: 2}
   - {fileID: 11400000, guid: d83c9b00745e17f4c93cca84d6064365, type: 2}
-  tileAmounts: ffffffffffffffffffffffffffffffffffffffffffffffff
+  - {fileID: 11400000, guid: 6f05f7907dbf80344bf78d5fa97132cd, type: 2}
+  tileAmounts: ffffffffffffffffffffffffffffffffffffffffffffffff05000000
   eraser: {fileID: 2605282029721990454, guid: cc51761a1bd75924897c7f34a71521fe, type: 3}
