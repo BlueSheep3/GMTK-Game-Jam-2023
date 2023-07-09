@@ -2228,7 +2228,123 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
       propertyPath: m_text
-      value: 07 - Skies
+      value: 08 - Flight
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_xAdvance
+      value: 312.55814
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_lineNumber
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_lineOffset
+      value: 80.49316
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_characterCount
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_preferredWidth
+      value: 312.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_maxLineAscender
+      value: 63.369137
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_maxLineDescender
+      value: -14.833983
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_lastCharacterOfLine
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_startOfLineAscender
+      value: 63.369137
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_totalCharacterCount
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_firstCharacterOfLine
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_lineVisibleCharacterCount
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_lastVisibleCharacterOfLine
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_cached_TextElement.m_Unicode
+      value: 116
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_InternalTextProcessingArraySize
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_cached_TextElement.m_GlyphIndex
+      value: 87
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_cached_TextElement.m_Glyph.m_Index
+      value: 87
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_cached_TextElement.m_Glyph.m_GlyphRect.m_X
+      value: 388
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_cached_TextElement.m_Glyph.m_GlyphRect.m_Y
+      value: 672
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_cached_TextElement.m_Glyph.m_Metrics.m_Width
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_cached_TextElement.m_Glyph.m_Metrics.m_Height
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_cached_TextElement.m_Glyph.m_GlyphRect.m_Width
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_cached_TextElement.m_Glyph.m_GlyphRect.m_Height
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_cached_TextElement.m_Glyph.m_Metrics.m_HorizontalAdvance
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_cached_TextElement.m_Glyph.m_Metrics.m_HorizontalBearingX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_cached_TextElement.m_Glyph.m_Metrics.m_HorizontalBearingY
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 6810358053982096724, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
       propertyPath: m_LocalPosition.x

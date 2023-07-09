@@ -193,7 +193,7 @@ class TilePlacer : MonoBehaviour
 
 	bool CanPlaceTile(int index, Vector3Int position) {
 		Vector3 p = Player.inst.transform.position;
-		if(p.x - 1 >= position.x && p.x + 1 <= position.x && p.y - 1 >= position.y && p.y + 1 <= position.y)
+		if(p.x - 1 <= position.x && p.x + 1 >= position.x && p.y - 1 <= position.y && p.y + 1 >= position.y)
 			return false;
 		if(index == tileAmounts.Length)
 			return tileHasBeenPlacedHere.HasTile(position);
