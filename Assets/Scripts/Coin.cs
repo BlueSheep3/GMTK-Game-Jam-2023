@@ -1,37 +1,42 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-class Coin : MonoBehaviour
+class Coin : MonoBehaviour, IRetryable
 {
+	// self refs
+	public SpriteRenderer sr;
+	public Rigidbody2D rb;
+
+	// fields
+	Vector3 startPos;
+	float alpha = 1;
+
+
 	void Start() {
-		if(Savedata.savefile.collectedCoins[Player.inst.currentLevelId])
-			Destroy(gameObject);
+		if(Savedata.savefile.collectedCoins[Player.inst.currentLevelId - 1])
+			sr.color = new Color(1/3f, 1/3f, 2/3f, 1f);
+		startPos = transform.position;
 	}
 
-	void OnCollisionEnter2D(Collision2D collision) {
-		if (collision.gameObject.tag != "Player" || transform.GetComponent<SpriteRenderer>().color != new Color(1,1,1,1))
+	void FixedUpdate() {
+		if(alpha < 1) {
+			if(alpha <= 0) return;
+			alpha -= 0.04f;
+			Color color = sr.color;
+			color.a = alpha;
+			sr.color = color;
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D other) {
+		if(other.tag != "Player" || sr.color.a != 1)
 			return;
-		transform.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0.2f);
-		Fade(1);
+		rb.velocity = new Vector2(0, 0.4f);
+		alpha -= 0.04f;
 	}
 
-	void Fade(float transparency) {
-		if(transparency < 0)
-			return;
-		transform.GetComponent<SpriteRenderer>().color = new Color(1,1,1,transparency - 0.1f);
-		Invoke("Fade", 0.1f);
-	}
-
-	public void SaveCoin() {//TODO: use this at the end of a level for each coin
-		if(transform.GetComponent<SpriteRenderer>().color != new Color(1,1,1,1))
-			Savedata.savefile.collectedCoins[Player.inst.currentLevelId] = true;
-	}
-
-	public static int GetTotalCoins() {//TODO: use this in the UI
-		int total = 0;
-		foreach(bool coin in Savedata.savefile.collectedCoins)
-			if(coin)
-				total++;
-		return total;
+	public void Retry() {
+		transform.position = startPos;
+		sr.color = Color.white;
+		rb.velocity = Vector2.zero;
 	}
 }
