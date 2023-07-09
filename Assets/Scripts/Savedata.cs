@@ -13,7 +13,7 @@ static class Savedata
 		public int volume = 100; // 0 to 100
 		public int screenSize = 0; // 0: fullscreen
 		public int maxLevelCompleted = 0;
-		public bool[] collectedCoins = new bool[20];
+		public bool[] collectedCoins = new bool[8];
 
 		public int coinCount => collectedCoins.Count(x => x);
 	}
