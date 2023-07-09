@@ -80,7 +80,7 @@ class InputDisplay : MonoBehaviour, IRetryable
 	}
 
 	public void Retry() {
-		remainingInputs = new(levelInputs);
+		remainingInputs = new(levelInputs ?? new());
 		CreateVisuals();
 	}
 }

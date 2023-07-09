@@ -21,10 +21,10 @@ class Coin : MonoBehaviour, IRetryable
 		if(alpha < 1) {
 			if(alpha <= 0) return;
 			alpha -= 0.04f;
-			Color color = sr.color;
-			color.a = alpha;
-			sr.color = color;
 		}
+		Color color = sr.color;
+		color.a = alpha;
+		sr.color = color;
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {

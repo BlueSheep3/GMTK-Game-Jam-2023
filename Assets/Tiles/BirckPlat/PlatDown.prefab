@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9169006490971465779}
   - component: {fileID: 7184844849729798784}
   - component: {fileID: 7184844849729798785}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlatDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
