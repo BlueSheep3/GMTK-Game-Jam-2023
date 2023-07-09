@@ -21,7 +21,7 @@ class InGameGUI : MonoBehaviour
 
 	// NOTE also used by hotkey
 	public void ClickedPlay() {
-		if(Player.inst.isPlaying) return;
+		if(Player.inst.isPlaying || Player.inst.hasWon) return;
 		Player.inst.StartPlayback();
 		whileBuildingButtons.SetActive(false);
 		whilePlayingButtons.SetActive(true);
@@ -30,7 +30,7 @@ class InGameGUI : MonoBehaviour
 
 	// NOTE also used by hotkey
 	public void ClickedRetry() {
-		if(!Player.inst.isPlaying) return;
+		if(!Player.inst.isPlaying || Player.inst.hasWon) return;
 
 		foreach(GameObject o in GameObject.FindObjectsOfType<GameObject>()) {
 			if(o.TryGetComponent<IRetryable>(out var r))

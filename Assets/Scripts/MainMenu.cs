@@ -13,6 +13,7 @@ class MainMenu : MonoBehaviour
 	public Slider qualitySlider;
 	public Slider volumeSlider;
 	public TMP_Text screenSizeText;
+	public TMP_Text coinCounterText;
 
 	void Awake() {
 		if(Savedata.savefile == null)
@@ -21,6 +22,8 @@ class MainMenu : MonoBehaviour
 		qualitySlider.value = Savedata.savefile.quality;
 		volumeSlider.value = Savedata.savefile.volume;
 		SetScreenSizeText();
+
+		coinCounterText.text = Savedata.savefile.coinCount.ToString();
 	}
 
 	#region: levels

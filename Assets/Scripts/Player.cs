@@ -141,7 +141,7 @@ class Player : MonoBehaviour, IRetryable
 		if(recording == null) return;
 		foreach(string line in recording.Split('\n'))
 			inputs.Add(new PlayerInput(line));
-		Debug.Log($"loaded recording from Inputs{id}.txt");
+		Debug.Log($"loaded recording from LevelInputs/{id}.txt");
 	}
 	#endregion
 

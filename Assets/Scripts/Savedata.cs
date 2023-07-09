@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.IO;
+using System.Linq;
 
 static class Savedata
 {
@@ -13,6 +14,8 @@ static class Savedata
 		public int screenSize = 0; // 0: fullscreen
 		public int maxLevelCompleted = 0;
 		public bool[] collectedCoins = new bool[20];
+
+		public int coinCount => collectedCoins.Count(x => x);
 	}
 
 	public static void Load() {
