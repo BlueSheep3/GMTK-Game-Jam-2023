@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 class InGameGUI : MonoBehaviour
 {
@@ -7,6 +8,16 @@ class InGameGUI : MonoBehaviour
 	public GameObject whileBuildingButtons;
 	public GameObject whilePlayingButtons;
 	public GameObject youWinPoppup;
+	public TMP_Text youWinNextText;
+	public GameObject thxText;
+
+	void Start() {
+		if(Player.inst.currentLevelId == 8) {
+			youWinNextText.text = "Main Menu";
+			youWinNextText.fontSize = 55;
+			thxText.SetActive(true);
+		}
+	}
 
 	void Update() {
 		if(Player.inst.hasWon) return;
@@ -47,7 +58,10 @@ class InGameGUI : MonoBehaviour
 	}
 
 	public void ClickedWonNext() {
-		SceneManager.LoadScene(Player.inst.currentLevelId + 1);
+		if(Player.inst.currentLevelId == 8)
+			SceneManager.LoadScene("MainMenu");
+		else
+			SceneManager.LoadScene(Player.inst.currentLevelId + 1);
 		SoundHandler.PlaySound("Click", 1);
 	}
 
