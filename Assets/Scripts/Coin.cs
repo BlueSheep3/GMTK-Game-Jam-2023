@@ -32,6 +32,7 @@ class Coin : MonoBehaviour, IRetryable
 			return;
 		rb.velocity = new Vector2(0, 0.4f);
 		alpha -= 0.04f;
+		SoundHandler.PlaySound("Collect", 1);
 	}
 
 	public void Retry() {
