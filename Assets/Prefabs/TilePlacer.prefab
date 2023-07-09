@@ -58,5 +58,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d1c504d50d72fd2408351226e5ed9bdc, type: 2}
   - {fileID: 11400000, guid: d83c9b00745e17f4c93cca84d6064365, type: 2}
   - {fileID: 11400000, guid: 6f05f7907dbf80344bf78d5fa97132cd, type: 2}
-  tileAmounts: fffffffffffffffffffffffffffffffffffffffffffffffffbffffff
+  tileAmounts: ffffffffffffffffffffffffffffffffffffffffffffffffffffffff
   eraser: {fileID: 2605282029721990454, guid: cc51761a1bd75924897c7f34a71521fe, type: 3}
