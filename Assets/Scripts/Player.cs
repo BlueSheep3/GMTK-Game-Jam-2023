@@ -54,6 +54,11 @@ class Player : MonoBehaviour, IRetryable
 			currentLevelId = int.Parse(levelName.Substring(5));
 			LoadRecording(currentLevelId);
 		}
+
+		if(currentLevelId == 7 || currentLevelId == 8)
+			SoundHandler.PlayMusic("SkyPuzzle");
+		else
+			SoundHandler.PlayMusic("BubbleGumPuzzler");
 	}
 
 	void Update() {

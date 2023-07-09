@@ -8,7 +8,7 @@ class Coin : MonoBehaviour, IRetryable
 
 	// fields
 	Vector3 startPos;
-	float alpha = 1;
+	internal float alpha = 1;
 
 
 	void Start() {
@@ -23,12 +23,12 @@ class Coin : MonoBehaviour, IRetryable
 			alpha -= 0.04f;
 		}
 		Color color = sr.color;
-		color.a = alpha;
+		color.a = Mathf.Clamp01(alpha);
 		sr.color = color;
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if(other.tag != "Player" || sr.color.a != 1)
+		if(other.tag != "Player" || alpha != 1)
 			return;
 		rb.velocity = new Vector2(0, 0.4f);
 		alpha -= 0.04f;
