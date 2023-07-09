@@ -25,6 +25,7 @@ class MainMenu : MonoBehaviour
 
 	#region: levels
 	public void ClickedLevels() {
+		SoundHandler.PlaySound("Click", 1);
 		if(Savedata.savefile.maxLevelCompleted == 0) {
 			SceneManager.LoadScene("Level1");
 			return;
@@ -36,6 +37,7 @@ class MainMenu : MonoBehaviour
 	public void LevelsBack() {
 		mainMenu.SetActive(true);
 		levelsMenu.SetActive(false);
+		SoundHandler.PlaySound("Click", 1);
 	}
 	#endregion
 
@@ -43,11 +45,13 @@ class MainMenu : MonoBehaviour
 	public void ClickedSettings() {
 		mainMenu.SetActive(false);
 		settingsMenu.SetActive(true);
+		SoundHandler.PlaySound("Click", 1);
 	}
 
 	public void SettingsBack() {
 		mainMenu.SetActive(true);
 		settingsMenu.SetActive(false);
+		SoundHandler.PlaySound("Click", 1);
 	}
 
 	public void ChangedQuality(Slider slider) {
@@ -71,6 +75,7 @@ class MainMenu : MonoBehaviour
 			Screen.SetResolution(960 * size, 540 * size, false);
 		
 		SetScreenSizeText();
+		SoundHandler.PlaySound("Click", 1);
 	}
 
 	void SetScreenSizeText() {
@@ -85,11 +90,13 @@ class MainMenu : MonoBehaviour
 	public void ClickedCredits() {
 		mainMenu.SetActive(false);
 		creditsMenu.SetActive(true);
+		SoundHandler.PlaySound("Click", 1);
 	}
 
 	public void CreditsBack() {
 		mainMenu.SetActive(true);
 		creditsMenu.SetActive(false);
+		SoundHandler.PlaySound("Click", 1);
 	}
 	#endregion
 

@@ -23,6 +23,11 @@
   - key & door
 
 
+## bugs
+
+- win poppup can do weird stuff
+
+
 ## todo
 
 - player robot sprite
@@ -32,10 +37,12 @@
 - sfx
 - better main menu (bg)
 - credits
-- grass tiles
-- winning
+- grass tiles?
+- coin system
+- come up with name
+- better ui
 
 ## very important
 
-- winning
 - tutorial
+- more levels

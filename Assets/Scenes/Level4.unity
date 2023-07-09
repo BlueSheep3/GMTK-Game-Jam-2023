@@ -2447,6 +2447,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2653089819231926073, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653089819231926073, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653089819231926073, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
       propertyPath: m_text
       value: 04 - Stairs
