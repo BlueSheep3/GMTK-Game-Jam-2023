@@ -25,7 +25,7 @@
 
 ## bugs
 
-- win poppup can do weird stuff
+- 
 
 
 ## todo
