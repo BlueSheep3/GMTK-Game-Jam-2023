@@ -220,6 +220,8 @@ class Player : MonoBehaviour, IRetryable
 	#region: collision
 	void OnCollisionStay2D(Collision2D collision) {
 		CustomRuleTile tile = GetCollisionTileInfo(collision);
+		if (tile == null)
+			return;
 
 		switch(tile?.type) {
 			case CustomRuleTile.Type.Deadly: Die(); break;

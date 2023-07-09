@@ -1,3 +1,2 @@
 - enemy
-- level5 coin
 - spring levels

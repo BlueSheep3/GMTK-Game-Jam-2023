@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-// NOTE relies on the EdgeCollider's 2nd Point to be to the top/right of the 1st
 class Platform : MonoBehaviour
 {
 	public EdgeCollider2D col = null!;
@@ -31,6 +30,6 @@ class Platform : MonoBehaviour
 		while(self == map.GetTile(cell + length * (Vector3Int)offsetVec))
 			length++;
 
-		col.points[1] += (length - 1.001f) * (Vector2)offsetVec;
+		col.points = new Vector2[2] { col.points[0], col.points[1] + (length - 1.001f) * (Vector2)offsetVec };
 	}
 }
