@@ -23,6 +23,7 @@ class Player : MonoBehaviour, IRetryable
 
 	// refs
 	public RuntimeAnimatorController[] animatorControllers = new RuntimeAnimatorController[4];
+	public GameObject explosionParticles;
 
 	// fields
 	bool grounded = false;
@@ -248,7 +249,9 @@ class Player : MonoBehaviour, IRetryable
 
 	#region: death
 	void Die() {
+		Instantiate(explosionParticles, transform.position, Quaternion.identity);
 		transform.position = new(-1000, -1000, 0);
+		SoundHandler.PlaySound("Explosion", 1);
 	}
 
 	public void Retry() {
