@@ -56,6 +56,7 @@ MonoBehaviour:
   - {fileID: 9100000, guid: ceefa796f7e543240a28e49574ce92ec, type: 2}
   - {fileID: 9100000, guid: 3665a222fc554e6488ba46d5fcaabd09, type: 2}
   - {fileID: 9100000, guid: 79266d21c3a0691458362fd0475b4568, type: 2}
+  explosionParticles: {fileID: 2941655584584929422, guid: 59aaf094e60e4914c9a0aad3928886d4, type: 3}
 --- !u!50 &3751953447268722824
 Rigidbody2D:
   serializedVersion: 4

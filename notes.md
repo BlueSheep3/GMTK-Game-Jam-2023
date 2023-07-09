@@ -30,19 +30,9 @@
 
 ## todo
 
-- player robot sprite
-- editable areas
-- tile sprites
 - music
-- sfx
-- better main menu (bg)
-- credits
-- grass tiles?
-- coin system
 - come up with name
-- better ui
 
 ## very important
 
-- tutorial
-- more levels
+- tutorial (probably not enough time)
