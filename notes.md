@@ -30,7 +30,6 @@
 
 ## todo
 
-- music
 - come up with name
 
 ## very important

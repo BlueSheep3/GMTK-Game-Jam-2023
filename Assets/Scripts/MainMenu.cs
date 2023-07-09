@@ -26,6 +26,8 @@ class MainMenu : MonoBehaviour
 		coinCounterText.text = Savedata.savefile.coinCount.ToString();
 
 		Cursor.visible = true;
+
+		SoundHandler.PlayMusic("GameMenu");
 	}
 
 	#region: levels
