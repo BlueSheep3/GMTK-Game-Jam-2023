@@ -1,4 +1,3 @@
 - enemy
-- new levels
-- goal trigger
-- springs
+- level5 coin
+- spring levels
