@@ -65,7 +65,7 @@ class TilePlacer : MonoBehaviour
 		Vector3 mousePos = Input.mousePosition;
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
         Vector3Int cellPos = tilemap.WorldToCell(worldPos);
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || (Input.GetMouseButton(0) && currentTile == tileAmounts.Length))
 			if(CanPlaceTile(currentTile, cellPos))
 				PlaceTile(currentTile, cellPos);
 		previewTiles(cellPos);
@@ -194,6 +194,11 @@ class TilePlacer : MonoBehaviour
 				return i;
 		}
 		return tileAmounts.Length;
+	}
+
+	public void MakeVisible(bool visible) {
+		foreach(TMPro.TextMeshProUGUI obj in tileCounterCounts)
+		obj.transform.parent.gameObject.SetActive(visible);
 	}
 
 	bool CanPlaceTile(int index, Vector3Int position) {
