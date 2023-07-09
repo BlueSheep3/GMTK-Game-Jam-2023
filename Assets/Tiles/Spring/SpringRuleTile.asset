@@ -19,7 +19,7 @@ MonoBehaviour:
   - m_Id: 3
     m_Sprites:
     - {fileID: 21300000, guid: 71f1490a8c098be42841ded27ee363c7, type: 3}
-    m_GameObject: {fileID: 7957685082136837000, guid: 765e3d6b735fc504ebfbf978d1b7a919, type: 3}
+    m_GameObject: {fileID: 472588969710438063, guid: fcb904a0d5956434e91ba23da8a510ef, type: 3}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
     m_PerlinScale: 0.5
@@ -33,7 +33,7 @@ MonoBehaviour:
   - m_Id: 0
     m_Sprites:
     - {fileID: 21300000, guid: 71f1490a8c098be42841ded27ee363c7, type: 3}
-    m_GameObject: {fileID: 7177037838766928344, guid: 6438a479084dc4549ac14233b8964486, type: 3}
+    m_GameObject: {fileID: 8247768723909825814, guid: c3ac34d3088bc5a48b19acdb83810dbe, type: 3}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
     m_PerlinScale: 0.5
@@ -47,7 +47,7 @@ MonoBehaviour:
   - m_Id: 2
     m_Sprites:
     - {fileID: 21300000, guid: 71f1490a8c098be42841ded27ee363c7, type: 3}
-    m_GameObject: {fileID: 6222497427525278548, guid: dc2ff286965e26443aa22fe3eb5d8304, type: 3}
+    m_GameObject: {fileID: 8113079381037476173, guid: 624fa196d72908749becf7161e531735, type: 3}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
     m_PerlinScale: 0.5
@@ -61,7 +61,7 @@ MonoBehaviour:
   - m_Id: 4
     m_Sprites:
     - {fileID: 21300000, guid: 71f1490a8c098be42841ded27ee363c7, type: 3}
-    m_GameObject: {fileID: 2192162633602461510, guid: d79f6e2f235ce15479d3947b45edfbd7, type: 3}
+    m_GameObject: {fileID: 8943796742280974262, guid: 9779b33afd67a77479d41d88e679ac1a, type: 3}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
     m_PerlinScale: 0.5
@@ -75,7 +75,7 @@ MonoBehaviour:
   - m_Id: 1
     m_Sprites:
     - {fileID: 21300000, guid: 71f1490a8c098be42841ded27ee363c7, type: 3}
-    m_GameObject: {fileID: 7957685082136837000, guid: 765e3d6b735fc504ebfbf978d1b7a919, type: 3}
+    m_GameObject: {fileID: 472588969710438063, guid: fcb904a0d5956434e91ba23da8a510ef, type: 3}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
     m_PerlinScale: 0.5
