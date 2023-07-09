@@ -202,8 +202,7 @@ class TilePlacer : MonoBehaviour
 		if(tileHasBeenPlacedHere.HasTile(position))
 			return false;
 		if(tilemap.HasTile(position))
-			if(tilemap.GetColliderType(position) != Tile.ColliderType.None)
-				return false;
+			return false;
 		if(pointingAtUIElement())
 			return false;
 		return true;
