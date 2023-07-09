@@ -37,7 +37,10 @@ class Coin : MonoBehaviour, IRetryable
 
 	public void Retry() {
 		transform.position = startPos;
-		sr.color = Color.white;
 		rb.velocity = Vector2.zero;
+		alpha = 1f;
+		Color color = sr.color;
+		color.a = alpha;
+		sr.color = color;
 	}
 }
