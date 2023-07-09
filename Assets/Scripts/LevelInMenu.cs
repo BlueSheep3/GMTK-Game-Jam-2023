@@ -16,7 +16,7 @@ class LevelInMenu : MonoBehaviour
 			button.interactable = false;
 		}
 		if(Savedata.savefile.collectedCoins[levelId - 1])
-			image.color = Color.yellow;
+			image.color = Color.cyan;
 	}
 
 	public void Clicked() {
