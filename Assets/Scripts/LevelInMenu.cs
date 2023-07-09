@@ -19,5 +19,6 @@ class LevelInMenu : MonoBehaviour
 	public void Clicked() {
 		if(levelId > Savedata.savefile.maxLevelCompleted + 1) return;
 		SceneManager.LoadScene(levelId);
+		SoundHandler.PlaySound("Click", 1);
 	}
 }

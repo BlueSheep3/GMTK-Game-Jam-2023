@@ -35,6 +35,8 @@ class Player : MonoBehaviour, IRetryable
 	Vector3 startPos;
 	internal bool hasWon = false;
 	internal int currentLevelId = -1;
+	int stepTimer = 0;
+	Vector2 prevVelocity;
 
 
 	void Awake() {
@@ -63,7 +65,11 @@ class Player : MonoBehaviour, IRetryable
 	}
 
 	void FixedUpdate() {
+		bool wasOnGround = grounded;
 		grounded = IsGrounded();
+		if(!wasOnGround && grounded) {
+			SoundHandler.PlaySound("Landing", Mathf.Lerp(0f, 0.75f, -prevVelocity.y / 20f));
+		}
 
 		if(recording) {
 			DoInput(currentInput);
@@ -79,6 +85,15 @@ class Player : MonoBehaviour, IRetryable
 		}
 		DoMovement();
 		UpdateAnimState();
+
+		if(grounded && Mathf.Abs(rb.velocity.x) > 0.2f) {
+			stepTimer++;
+			if(stepTimer >= 10) {
+				stepTimer = 0;
+				SoundHandler.PlaySound("Step" + Random.Range(0, 5), 0.25f);
+			}
+		}
+		prevVelocity = rb.velocity;
 	}
 
 	void DebugHotKeys() {
@@ -132,11 +147,6 @@ class Player : MonoBehaviour, IRetryable
 
 	#region: movement
 	void DoMovement() {
-		// temporarily just change sr color
-		// Color color = Color.black;
-		// color.r = grounded ? 1 : 0;
-		// spriteRenderer.color = color;
-
 		Vector2 newVel = rb.velocity;
 
 		newVel.x *= grounded ? FRICTION : DRAG;
@@ -152,6 +162,7 @@ class Player : MonoBehaviour, IRetryable
 		if(grounded && input.jump) {
 			newVel.y = JUMP_STRENGTH;
 			grounded = false;
+			SoundHandler.PlaySound("Jump", 0.65f);
 		}
 
 		int xInput = (input.left ? -1 : 0) + (input.right ? 1 : 0);

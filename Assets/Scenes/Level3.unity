@@ -2257,7 +2257,7 @@ Transform:
   - {fileID: 967560088}
   - {fileID: 641664757}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &967560087
 GameObject:
@@ -2414,6 +2414,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2653089819231926073, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653089819231926073, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653089819231926073, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6810358053039391490, guid: 3cb10a271e64c5f4ebca7db88578d5a1, type: 3}
       propertyPath: m_text
       value: 03 - The First Climb
