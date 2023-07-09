@@ -31,7 +31,7 @@ class Player : MonoBehaviour, IRetryable
 	PlayerInput currentInput = new();
 	int playbackIndex = 0;
 	internal List<PlayerInput> inputs = new();
-	internal bool isPlaying = false;
+	internal bool isPlaying = true;
 	internal bool playbackHasFinished = false;
 	Vector3 startPos;
 	internal bool hasWon = false;

@@ -3,6 +3,9 @@ using UnityEngine;
 
 class InputDisplay : MonoBehaviour, IRetryable
 {
+	// self refs
+	public RectTransform rectTransform;
+
 	// refs
 	public GameObject inputAndTimePrefab;
 
@@ -26,6 +29,9 @@ class InputDisplay : MonoBehaviour, IRetryable
 	void FixedUpdate() {
 		if(Player.inst.isPlaying)
 			AdvancePlayback();
+
+		float y = Player.inst.isPlaying ? -50 : -10000;
+		rectTransform.anchoredPosition = new(-785, y);
 	}
 
 	void GetInputsFromPlayerInputs(List<PlayerInput> playerInputs) {
