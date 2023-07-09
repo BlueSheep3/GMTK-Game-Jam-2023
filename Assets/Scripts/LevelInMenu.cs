@@ -6,14 +6,17 @@ class LevelInMenu : MonoBehaviour
 {
 	// self refs
 	public Image image;
+	public Button button;
 
 	// fields
 	public int levelId;
 
 	void Start() {
 		if(levelId > Savedata.savefile.maxLevelCompleted + 1) {
-			image.color = Color.gray;
+			button.interactable = false;
 		}
+		if(Savedata.savefile.collectedCoins[levelId - 1])
+			image.color = Color.yellow;
 	}
 
 	public void Clicked() {

@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 2542003685986909088}
+  button: {fileID: 4158799966946050285}
   levelId: 1
 --- !u!222 &5814486396922691461
 CanvasRenderer:
