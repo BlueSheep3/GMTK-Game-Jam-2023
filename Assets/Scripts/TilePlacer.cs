@@ -21,9 +21,7 @@ class TilePlacer : MonoBehaviour
 	GameObject eraserInstance;
 
 
-	void Start()
-    {
-		eraserInstance = Instantiate(eraser, canvas.transform);
+	void Start() {
 		if(allTileOptions.Length != tileAmounts.Length)
 			Debug.LogError("Tile options and amounts do not match");
 		int counter = 0;
@@ -45,17 +43,20 @@ class TilePlacer : MonoBehaviour
 				tileCounterCounts.Add(tileCounterObj.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>());
 			}
 		}
+		// this is not the eraser, but the button to select the eraser
 		Transform eraserObj = Instantiate(tileCounter, canvas.transform).transform;
 		eraserObj.GetComponent<TileCounter>().tilePlacer = this;
 		eraserObj.GetComponent<TileCounter>().tileIndex = counter2;
 		eraserObj.localPosition += new Vector3((counter2++ - counter*0f) * tileCounter.GetComponent<RectTransform>().rect.width * 1.2f - 830, -370, 0);
 		eraserObj.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>().text = "";
 		eraserObj.GetChild(1).GetComponent<Image>().sprite = eraser.GetComponent<SpriteRenderer>().sprite;
-	}
-    
 
-    void Update()
-    {
+		// instantiating eraser at the very end so that it renders on top of everything
+		eraserInstance = Instantiate(eraser, canvas.transform);
+	}
+
+
+	void Update() {
 		if(Player.inst.isPlaying) {
 			previewLayer.ClearAllTiles();
 			Cursor.visible = true;
@@ -63,31 +64,22 @@ class TilePlacer : MonoBehaviour
 			return;
 		}
 		Vector3 mousePos = Input.mousePosition;
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-        Vector3Int cellPos = tilemap.WorldToCell(worldPos);
-        if (Input.GetMouseButtonDown(0) || (Input.GetMouseButton(0) && currentTile == tileAmounts.Length))
+		Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+		Vector3Int cellPos = tilemap.WorldToCell(worldPos);
+		if (Input.GetMouseButtonDown(0) || (Input.GetMouseButton(0) && currentTile == tileAmounts.Length))
 			if(CanPlaceTile(currentTile, cellPos))
 				PlaceTile(currentTile, cellPos);
 		previewTiles(cellPos);
-		if(Input.GetKeyDown(KeyCode.Alpha1))
-			SetCurrentTile(0);
-		if(Input.GetKeyDown(KeyCode.Alpha2))
-			SetCurrentTile(1);
-		if(Input.GetKeyDown(KeyCode.Alpha3))
-			SetCurrentTile(2);
-		if(Input.GetKeyDown(KeyCode.Alpha4))
-			SetCurrentTile(3);
-		if(Input.GetKeyDown(KeyCode.Alpha5))
-			SetCurrentTile(4);
-		if(Input.GetKeyDown(KeyCode.Alpha6))
-			SetCurrentTile(5);
-		if(Input.GetKeyDown(KeyCode.Alpha7))
-			SetCurrentTile(6);
-		if(Input.GetKeyDown(KeyCode.Alpha8))
-			SetCurrentTile(7);
-		if(Input.GetKeyDown(KeyCode.Alpha9))
-			SetCurrentTile(8);
-    }
+		if(Input.GetKeyDown(KeyCode.Alpha1)) SetCurrentTile(0);
+		if(Input.GetKeyDown(KeyCode.Alpha2)) SetCurrentTile(1);
+		if(Input.GetKeyDown(KeyCode.Alpha3)) SetCurrentTile(2);
+		if(Input.GetKeyDown(KeyCode.Alpha4)) SetCurrentTile(3);
+		if(Input.GetKeyDown(KeyCode.Alpha5)) SetCurrentTile(4);
+		if(Input.GetKeyDown(KeyCode.Alpha6)) SetCurrentTile(5);
+		if(Input.GetKeyDown(KeyCode.Alpha7)) SetCurrentTile(6);
+		if(Input.GetKeyDown(KeyCode.Alpha8)) SetCurrentTile(7);
+		if(Input.GetKeyDown(KeyCode.Alpha9)) SetCurrentTile(8);
+	}
 
 	void previewTiles(Vector3Int position) {
 		previewLayer.ClearAllTiles();
@@ -95,9 +87,8 @@ class TilePlacer : MonoBehaviour
 		eraserInstance.transform.position = new Vector3(0, -1000, 0);
 		if(currentTile == tileAmounts.Length) {
 			Vector3 mousePos = Input.mousePosition;
-        	Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-			Vector3 newPos = new Vector3(worldPos.x + 0.3f, worldPos.y + 0.35f, 0);
-			eraserInstance.transform.position = newPos;
+			eraserInstance.transform.position = mousePos;
+			eraserInstance.GetComponent<RectTransform>().anchoredPosition += new Vector2(25, 25);
 			Cursor.visible = false;
 			return;
 		}
