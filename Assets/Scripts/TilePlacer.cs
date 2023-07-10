@@ -17,6 +17,7 @@ class TilePlacer : MonoBehaviour
 	public int[] tileAmounts;
 	public GameObject eraser;
 	List<TMPro.TextMeshProUGUI> tileCounterCounts = new();
+	GameObject tileCounterEraser;
 	int currentTile = -1;
 	GameObject eraserInstance;
 
@@ -44,12 +45,15 @@ class TilePlacer : MonoBehaviour
 			}
 		}
 		// this is not the eraser, but the button to select the eraser
-		Transform eraserObj = Instantiate(tileCounter, canvas.transform).transform;
-		eraserObj.GetComponent<TileCounter>().tilePlacer = this;
-		eraserObj.GetComponent<TileCounter>().tileIndex = counter2;
-		eraserObj.localPosition += new Vector3((counter2++ - counter*0f) * tileCounter.GetComponent<RectTransform>().rect.width * 1.2f - 830, -370, 0);
-		eraserObj.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>().text = "";
-		eraserObj.GetChild(1).GetComponent<Image>().sprite = eraser.GetComponent<SpriteRenderer>().sprite;
+		Transform eraserTrans = Instantiate(tileCounter, canvas.transform).transform;
+		eraserTrans.GetComponent<TileCounter>().tilePlacer = this;
+		eraserTrans.GetComponent<TileCounter>().tileIndex = counter2;
+		eraserTrans.localPosition += new Vector3((counter2++ - counter*0f) * tileCounter.GetComponent<RectTransform>().rect.width * 1.2f - 830, -370, 0);
+		eraserTrans.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>().text = "";
+		eraserTrans.GetChild(1).GetComponent<Image>().sprite = eraser.GetComponent<SpriteRenderer>().sprite;
+		tileCounterEraser = eraserTrans.gameObject;
+
+		MakeVisible(false);
 
 		// instantiating eraser at the very end so that it renders on top of everything
 		eraserInstance = Instantiate(eraser, canvas.transform);
@@ -189,7 +193,8 @@ class TilePlacer : MonoBehaviour
 
 	public void MakeVisible(bool visible) {
 		foreach(TMPro.TextMeshProUGUI obj in tileCounterCounts)
-		obj.transform.parent.gameObject.SetActive(visible);
+			obj.transform.parent.gameObject.SetActive(visible);
+		tileCounterEraser.SetActive(visible);
 	}
 
 	bool CanPlaceTile(int index, Vector3Int position) {

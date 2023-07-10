@@ -24,7 +24,7 @@ class Player : MonoBehaviour, IRetryable
 	// refs
 	public RuntimeAnimatorController[] animatorControllers = new RuntimeAnimatorController[4];
 	public GameObject explosionParticles;
-	public GameObject tilePlacer;
+	public TilePlacer tilePlacer;
 
 	// fields
 	bool grounded = false;
@@ -277,13 +277,13 @@ class Player : MonoBehaviour, IRetryable
 		isPlaying = true;
 		playbackHasFinished = false;
 		playbackIndex = 0;
-		tilePlacer.GetComponent<TilePlacer>().MakeVisible(false);
+		tilePlacer.MakeVisible(false);
 	}
 
 	public void StopPlayback() {
 		isPlaying = false;
 		playbackHasFinished = true;
-		tilePlacer.GetComponent<TilePlacer>().MakeVisible(true);
+		tilePlacer.MakeVisible(true);
 	}
 	#endregion
 }
