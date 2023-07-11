@@ -20,6 +20,7 @@ class TilePlacer : MonoBehaviour
 	GameObject tileCounterEraser;
 	int currentTile = -1;
 	GameObject eraserInstance;
+	bool eraserLockout = false;
 
 
 	void Start() {
@@ -70,10 +71,14 @@ class TilePlacer : MonoBehaviour
 		Vector3 mousePos = Input.mousePosition;
 		Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
 		Vector3Int cellPos = tilemap.WorldToCell(worldPos);
-		if (Input.GetMouseButtonDown(0) || (Input.GetMouseButton(0) && currentTile == tileAmounts.Length))
+
+		bool eraserCond = Input.GetMouseButton(0) && !eraserLockout;
+		if (Input.GetMouseButtonDown(0) || (eraserCond && currentTile == tileAmounts.Length))
 			if(CanPlaceTile(currentTile, cellPos))
 				PlaceTile(currentTile, cellPos);
+
 		previewTiles(cellPos);
+
 		if(Input.GetKeyDown(KeyCode.Alpha1)) SetCurrentTile(0);
 		if(Input.GetKeyDown(KeyCode.Alpha2)) SetCurrentTile(1);
 		if(Input.GetKeyDown(KeyCode.Alpha3)) SetCurrentTile(2);
@@ -83,6 +88,9 @@ class TilePlacer : MonoBehaviour
 		if(Input.GetKeyDown(KeyCode.Alpha7)) SetCurrentTile(6);
 		if(Input.GetKeyDown(KeyCode.Alpha8)) SetCurrentTile(7);
 		if(Input.GetKeyDown(KeyCode.Alpha9)) SetCurrentTile(8);
+
+		if(Input.GetMouseButtonUp(0))
+			eraserLockout = false;
 	}
 
 	void previewTiles(Vector3Int position) {
@@ -188,6 +196,8 @@ class TilePlacer : MonoBehaviour
 			if(tileAmounts[i] > 0)
 				return i;
 		}
+		// no tiles left => select eraser
+		eraserLockout = true;
 		return tileAmounts.Length;
 	}
 
